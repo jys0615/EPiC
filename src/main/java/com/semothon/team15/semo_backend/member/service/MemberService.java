@@ -1,6 +1,6 @@
 package com.semothon.team15.semo_backend.member.service;
 
-import com.semothon.team15.semo_backend.common.authority.JwtTokenProvider;
+//import com.semothon.team15.semo_backend.common.authority.JwtTokenProvider;
 import com.semothon.team15.semo_backend.common.exception.InvalidInputException;
 import com.semothon.team15.semo_backend.common.status.ROLE;
 import com.semothon.team15.semo_backend.member.dto.*;
@@ -19,17 +19,17 @@ import java.util.Optional;
 public class MemberService {
 
     private final MongoTemplate memberMongoTemplate;
-    private final JwtTokenProvider jwtTokenProvider;
+    //private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
     private final MemberRepositoryImpl memberRepository;
 
     public MemberService(
             @Qualifier("memberMongoTemplate") MongoTemplate memberMongoTemplate,
-            JwtTokenProvider jwtTokenProvider,
+            //JwtTokenProvider jwtTokenProvider,
             PasswordEncoder passwordEncoder,
             MemberRepositoryImpl memberRepository) {
         this.memberMongoTemplate = memberMongoTemplate;
-        this.jwtTokenProvider = jwtTokenProvider;
+        //this.jwtTokenProvider = jwtTokenProvider;
         this.passwordEncoder = passwordEncoder;
         this.memberRepository = memberRepository;
     }
@@ -78,8 +78,9 @@ public class MemberService {
         if (member == null || !passwordEncoder.matches(loginDto.getPassword(), member.getPassword())) {
             return "로그인 정보가 일치하지 않습니다.";
         }
+        return "로그인 성공";
 
-        return jwtTokenProvider.generateToken(member.getLoginId(), List.of(member.getRole().name()));
+        //return jwtTokenProvider.generateToken(member.getLoginId(), List.of(member.getRole().name()));
     }
 
 //    public void updateLoginId(String username, LoginIdUpdateRequest request) {

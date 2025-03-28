@@ -100,7 +100,7 @@ public class MemberController {
         return ResponseEntity.ok(
                 new BaseResponse<>(
                         "SUCCESS",
-                        result,
+                        null,
                         "로그인 성공"
                 )
         );

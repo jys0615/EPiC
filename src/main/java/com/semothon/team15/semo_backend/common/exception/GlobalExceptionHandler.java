@@ -10,11 +10,11 @@ import javax.naming.AuthenticationException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(JwtException.class)
-    public ResponseEntity<String> handleJwtException(JwtException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body("유효하지 않은 JWT 토큰입니다. : " + e.getMessage());
-    }
+//    @ExceptionHandler(JwtException.class)
+//    public ResponseEntity<String> handleJwtException(JwtException e) {
+//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                .body("유효하지 않은 JWT 토큰입니다. : " + e.getMessage());
+//    }
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
