@@ -1,4 +1,4 @@
-build/* linguist-vendored
+build/** linguist-vendored
 
 /gradlew text eol=lf
 *.bat text eol=crlf
