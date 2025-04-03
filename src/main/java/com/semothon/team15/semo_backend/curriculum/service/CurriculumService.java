@@ -24,27 +24,38 @@ public class CurriculumService {
         String addInfo = (requestDto.getAdd_info() == null) ? "" : requestDto.getAdd_info();
 
         String endpoint = "/recommend";
-
-        String aiResponse = restClient.post()
+        
+        try {
+            String aiResponse = restClient.post()
                 .uri(endpoint)
-                .body(new CurriculumRequestDto(requestDto.getKeyword(), addInfo))
+                .header("Content-Type", "application/json")
+                .body(requestDto)
                 .retrieve()
-                .body(String.class);
+                .body(String.class); 
 
         return new CurriculumResponseDto(requestDto.getKeyword(), addInfo, aiResponse);
+    } catch (Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException("AI response request failed", e);
     }
+}
 
     // 커리큘럼에 대한 추가 질문
     public QuestionResponseDto askAdditionalQuestion(QuestionRequestDto requestDto) {
 
         String endpoint = "/chat";
 
-        String aiAddResponse = restClient.post()
-                .uri(endpoint)
-                .body(requestDto)
-                .retrieve()
-                .body(String.class);
-        
-        return new QuestionResponseDto(requestDto.getQuestion(), aiAddResponse);
+        try {
+            String aiAddResponse = restClient.post()
+                    .uri(endpoint)
+                    .body(requestDto)
+                    .retrieve()
+                    .body(String.class);
+
+            return new QuestionResponseDto(requestDto.getQuestion(), aiAddResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("AI response request failed", e);
+        }
     }
 }
