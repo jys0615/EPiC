@@ -1,3 +1,5 @@
+// config/RestClient.java
+
 package com.semothon.team15.semo_backend.config;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +10,7 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class RestClientConfig {
 
-    @Value("fastapi.url")
+    @Value("${fastapi.url}")
     private String FASTAPI_BASE_URL;
 
     @Bean
