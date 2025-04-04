@@ -1,3 +1,5 @@
+// common/authority/SecurityConfig.java
+
 package com.semothon.team15.semo_backend.common.authority;
 
 import org.springframework.context.annotation.Bean;
@@ -19,7 +21,6 @@ import java.util.Arrays;
 public class SecurityConfig {
 
     @Bean
-    //public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -31,6 +32,10 @@ public class SecurityConfig {
                                 "/api/member/signup",
                                 "/api/member/check-login-id",
                                 "/api/member/verify-email",
+                                "/api/graduation/check",
+                                "/api/curriculum/recommend",
+                                "/api/curriculum/add-ques",
+                                "/api/timetable/get-timetable",
                                 "/error"
                         ).permitAll()
                         .requestMatchers("/api/member/**").hasAuthority("MEMBER")
@@ -49,15 +54,13 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
-                //.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:5173", "http://localhost:8000"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8000"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("*"));
         config.setAllowCredentials(true);
