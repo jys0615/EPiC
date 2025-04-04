@@ -29,7 +29,7 @@ public class MemberController {
         String result = memberService.signUp(memberDto);
 
         if (result.startsWith("이미 등록된") || result.startsWith("필수")) {
-            return ResponseEntity.ok(
+            return ResponseEntity.badRequest().body(
                     new BaseResponse<>(
                             "FAIL",
                             null,
@@ -89,13 +89,13 @@ public class MemberController {
         String result = memberService.login(loginDto);
 
         if (result.startsWith("로그인 정보가") || result.startsWith("로그인 아이디와 비밀번호")) {
-            return ResponseEntity.ok(
+            return ResponseEntity.badRequest().body((
                     new BaseResponse<>(
                             "FAIL",
                             null,
                             result
                     )
-            );
+            ));
         }
         return ResponseEntity.ok(
                 new BaseResponse<>(

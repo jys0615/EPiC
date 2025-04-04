@@ -14,7 +14,4 @@ import java.util.List;
 @AllArgsConstructor
 public class TimetableRequestDto {
     private List<MultipartFile> images;
-    public int getImagesCount(){
-        return images==null ? 0 : images.size();
-    }
 }

@@ -14,19 +14,7 @@ public class TimetableService {
         this.restClient = restClient;
     }
 
-    public String isAvaliable(TimetableRequestDto requestDto){
-        if(requestDto.getImagesCount()<2){
-            return "시간표 이미지 개수가 부족합니다.";
-        }
-        return "굿";
-    }
-
     public TimetableResponseDto processTimetables(TimetableRequestDto requestDto) {
-
-        String temp=isAvaliable(requestDto);
-        if(!"굿".equals(temp)){
-            throw new IllegalArgumentException(temp);
-        }
 
         String endpoint="/get-timetable";
 

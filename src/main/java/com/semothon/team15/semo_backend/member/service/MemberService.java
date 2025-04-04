@@ -75,6 +75,7 @@ public class MemberService {
         Query query = new Query(Criteria.where("loginId").is(loginDto.getLoginId()));
         MemberEntity member = memberMongoTemplate.findOne(query, MemberEntity.class, "member_info");
 
+        System.out.println(member);
         if (member == null || !passwordEncoder.matches(loginDto.getPassword(), member.getPassword())) {
             return "로그인 정보가 일치하지 않습니다.";
         }

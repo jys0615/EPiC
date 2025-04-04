@@ -19,6 +19,16 @@ public class EmailController {
 
     @PostMapping("/send")
     public ResponseEntity<BaseResponse<Void>> confirmEmailAuth(@RequestBody EmailDtoRequest dto) {
+        String email=dto.getEmail();
+        if(!email.split("@")[1].equals("khu.ac.kr")){
+            return ResponseEntity.badRequest().body(
+                    new BaseResponse<>(
+                            "FAIL",
+                            null,
+                            "경희대학교 이메일을 사용해주세요."
+                    )
+            );
+        }
         String authCode = emailService.makeAuthCode();
         emailService.sendAuthEmail(dto.getEmail(), authCode);
 
