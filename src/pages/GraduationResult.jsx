@@ -108,13 +108,13 @@ const Graduation = () => {
         {/* 분석 버튼 */}
       </div>
 
-      <div className="grad-result-button-container">
+      {/* <div className="grad-result-button-container">
         <Link to="/curriculum">
           <button type="button" className="grad-result-submit-button">
             추천 커리큘럼 알아보기
           </button>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };
