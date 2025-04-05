@@ -22,8 +22,9 @@
 }
 
 .result-container {
-  display: flex; /* 가로 정렬 */
-  gap: 20px; /* 시간표와 임시 이미지 간격 */
+  width: 100%;
+  display: flex;
+  gap: 20px;
 }
 
 .uploaded-images {
@@ -57,15 +58,33 @@
   align-items: center; /* 중앙 정렬 */
 }
 
+.timetable-button-container {
+  justify-content: flex-end;
+  display: flex;
+  width: 100%;
+  padding-right: 30px;
+  margin-top: 5px;
+}
+
 .download-button {
+  display: flex;
+  align-items: center; 
   margin-top: 10px;
-  padding: 10px;
-  background-color: var(--primary-hover-color);
-  color: white;
+  gap: 8px;
+  background-color: var(--border-color);
+  color: black;
   border: none;
   border-radius: 5px;
+  font-weight: 700;
+  padding: 9px 35px;
+  margin-top: 15px;
+  margin-left: auto;
+}
+
+.download-button svg {
+  align-items: center;
 }
 
 .download-button:hover {
-  background-color: var(--primary-hover-color);
+  background-color: var(--secondary-hover-color);
 }
