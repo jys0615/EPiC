@@ -22,9 +22,10 @@ public class GraduationController {
     public ResponseEntity<GraduationCheckResponseDto> checkGraduationRequirements(
             @RequestParam("file") MultipartFile file,
             @RequestParam("department") String department,
-            @RequestParam("studentId") String studentId) {
-        GraduationCheckRequestDto requestDto = new GraduationCheckRequestDto(file, department, studentId);
-        GraduationCheckResponseDto response = graduationService.checkRequirements(requestDto);
-        return ResponseEntity.ok(response);
-    }
+            @RequestParam("studentId") String studentId
+    ) {
+    GraduationCheckRequestDto requestDto = new GraduationCheckRequestDto(file, department, studentId);
+    GraduationCheckResponseDto response = graduationService.checkRequirements(requestDto);
+    return ResponseEntity.ok(response);
+}
 }
