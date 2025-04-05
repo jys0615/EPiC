@@ -25,13 +25,13 @@ const Graduation = () => {
         <div className="info-section">
           <h2 className="info-section-title">내 정보</h2>
           <div className="form-group-horizontal">
-            <div className="form-group-text">
+            <div className="form-group-text" id="department-title">
               <h4>학과</h4>
             </div>
             <div className="form-group-box">
               <p>{department}</p>
             </div>
-            <div className="form-group-text">
+            <div className="form-group-text" id="studentId-title">
               <h4>학번</h4>
             </div>
             <div className="form-group-box">
