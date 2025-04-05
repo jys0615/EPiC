@@ -14,9 +14,9 @@ const CONFIG = {
       RECOMMEND: '/curriculum/recommend',
       ADD_QUESTION: '/curriculum/add-ques',
 
-      GRADUATION: '/api/graduation/check',
+      GRADUATION: '/graduation/check',
 
-      TIMETABLE: '/api/timetable/get-timetable',
+      TIMETABLE: '/timetable/get-timetable',
     },
   },
 
