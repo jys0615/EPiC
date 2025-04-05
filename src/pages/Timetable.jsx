@@ -45,11 +45,13 @@ const Timetable = () => {
   return (
     <div>
       <Header />
+      <div className="time-container">
       <div className="timetable-intro">
         <h1 className="timetable-title">시간표 비교</h1>
         <p className="timetable-description">
           두 명 이상의 시간표를 업로드하여 공통으로 비어있는 시간을 확인하세요.
         </p>
+      </div>
       </div>
 
       <div className="upload-box-container">
