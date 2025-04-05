@@ -51,8 +51,9 @@ body {
   z-index: 10;
   margin-top: -10px;
   font-family: 'Itim', cursive;
-  font-size: 35px;
-  margin-bottom: 10px;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 38px;
+  margin-bottom: -10px;
 }
 
 .welcome-text {
@@ -60,8 +61,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-top: -8px;
-  margin-bottom: 0px;
+  margin-top: 40px;
+  margin-bottom: -25px;
 }
 
 .welcome-text h2 {
@@ -69,13 +70,14 @@ body {
   color: rgb(76, 69, 69);
   margin-bottom: 0;
   margin-top: 0;
+  font-size: 20px;
 }
 
 .welcome-description {
   max-width: 100%;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 0px;
+  margin-top: -45px;
+  margin-bottom: -5px;
   color: #555;
   font-size: 1.2rem;
   white-space: nowrap;

@@ -66,7 +66,7 @@ const Graduation = () => {
               </select>
             </div>
             <div className="form-group-text">
-              <h4>학번 선택</h4>
+              <h4 className="studentId-title">학번 선택</h4>
             </div>
             <div className="form-group">
               <select
@@ -122,7 +122,7 @@ const Graduation = () => {
         </div>
 
         {/* 분석 버튼 */}
-        <button type="button" onClick={handleAnalyzeClick} className="submit-button">
+        <button type="button" onClick={handleAnalyzeClick} className="grad-submit-button">
           성적표 분석하기
         </button>
       </div>

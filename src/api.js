@@ -22,3 +22,13 @@ export const addQuestionWithAI = async (question) => {
   const response = await springApi.post(CONFIG.SPRING_BOOT.ENDPOINTS.ADD_QUESTION, { question });
   return response.data;
 };
+
+export const getGraduationResult = async (formdata) => {
+  const response = await springApi.post(CONFIG.SPRING_BOOT.ENDPOINTS.GRADUATION, formdata);
+  return response.data; 
+};
+
+export const getTimetable = async (images) => {
+  const response = await springApi.post(CONFIG.SPRING_BOOT.ENDPOINTS.TIMETABLE, { images });
+  return response.data; 
+};

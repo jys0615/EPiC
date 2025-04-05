@@ -3,13 +3,14 @@
 @import './theme.css';
 
 .header-container {
-  background-color: #fff;
+  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 10;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: visible;
 }
 
 .header-content {
@@ -25,8 +26,10 @@
 
 .app-name {
   font-size: 35px;
-  font-family: 'Alkatra', sans-serif;
+  /* font-family: 'Alkatra', sans-serif; */
   /* font-family: 'Noto Sans', sans-serif; */
+  font-family: "Lexend", sans-serif;
+  /* font-weight: 700; */
   font-weight: 700;
   color: var(--khu-color);
   margin-left: 0px;
@@ -37,6 +40,18 @@
 
 .app-name:hover {
   color: #a74c46;
+}
+
+.logo-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-image png {
+  width: 10px;
+  height: 8px;
+  object-fit: contain;
 }
 
 .nav-links {

@@ -12,24 +12,29 @@
   },
   "dependencies": {
     "@fontsource/alkatra": "^5.2.5",
+    "@fontsource/baloo-2": "^5.2.5",
     "@fontsource/dancing-script": "^5.2.5",
     "@fontsource/gloria-hallelujah": "^5.2.5",
     "@fontsource/ibm-plex-sans-kr": "^5.2.5",
     "@fontsource/itim": "^5.2.5",
+    "@fontsource/lexend": "^5.2.6",
     "@fontsource/madimi-one": "^5.2.5",
     "@fontsource/noto-sans": "^5.2.6",
     "@fontsource/noto-sans-kr": "^5.2.5",
     "@fontsource/parisienne": "^5.2.5",
     "@fontsource/playball": "^5.2.5",
     "@fontsource/tillana": "^5.2.5",
+    "@svgr/webpack": "^8.1.0",
     "axios": "^1.8.4",
     "framer-motion": "^12.6.2",
+    "http-proxy-middleware": "^3.0.3",
     "lucide-react": "^0.486.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-dropzone": "^14.3.8",
     "react-image-file-resizer": "^0.4.8",
-    "react-router-dom": "^7.4.1"
+    "react-router-dom": "^7.4.1",
+    "react-svg": "^16.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
@@ -41,6 +46,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^15.15.0",
     "prettier": "^3.5.3",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vite-plugin-svgr": "^4.3.0"
   }
 }
