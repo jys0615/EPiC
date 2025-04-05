@@ -42,8 +42,8 @@ const Curriculum = () => {
 
       console.log('response:', response);
 
-      navigate('/curriculum-result', {
-        state: { keyword, aiResponse: response.ai_response },
+      navigate('/curriculum-q', {
+        state: { keyword, addInfo, aiResponse: response.ai_response },
       });
     } catch (error) {
       console.error('Request failed:', error);

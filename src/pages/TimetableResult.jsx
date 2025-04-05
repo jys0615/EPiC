@@ -9,16 +9,17 @@ import '../styles/timetable-result.css';
 const TimetableResult = () => {
   const location = useLocation(); // 이전 페이지에서 전달된 state 접근
   const { uploadBoxes } = location.state || { uploadBoxes: [] }; // 전달받은 업로드 박스 데이터
-
   const [resultImage, setResultImage] = useState(''); // API 결과 이미지 URL 저장
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
-  
+
   // 공강 시간표 API 호출
   useEffect(() => {
     const fetchTimetableResult = async () => {
       try {
         setIsLoading(true); // 로딩 시작
-        const images = uploadBoxes.flatMap((box) => box.files.map((file) => file.src)); // 업로드된 이미지 URL 배열로 변환
+        const images = uploadBoxes.flatMap((box) =>
+          box.files.map((file) => file.src),
+        ); // 업로드된 이미지 URL 배열로 변환
         const response = await getTimetable(images); // API 호출
         setResultImage(response); // API에서 받은 결과 이미지 URL 저장
       } catch (error) {
@@ -32,7 +33,6 @@ const TimetableResult = () => {
       fetchTimetableResult(); // 업로드된 이미지가 있을 경우에만 호출
     }
   }, [uploadBoxes]);
-
 
   //const temp_Image = 'https://placecats.com/g/300/200'; // 임시 이미지 URL
 
@@ -56,51 +56,61 @@ const TimetableResult = () => {
       <Header />
       <div className="timetable-intro">
         <h1 className="timetable-title">시간표 비교 결과</h1>
-        <p className="timetable-description">
-          겹치는 공강 시간을 확인하세요.
-        </p>
+        <p className="timetable-description">겹치는 공강 시간을 확인하세요.</p>
       </div>
 
       {/* 업로드된 이미지와 temp_Image 표시 */}
       <div className="result-container">
-      {/* 업로드된 이미지 */}
-      <div className="uploaded-images">
-        {uploadBoxes.map((box, index) => (
-          <div key={box.id} className="image-group">
-            <h3>시간표 {index + 1}</h3>
-            <div className="image-row">
-              {box.files.map((file, fileIndex) => (
-                <img
-                  key={fileIndex}
-                  src={file.src}
-                  alt={`Uploaded Timetable ${index + 1}`}
-                  className="uploaded-image"
-                />
-              ))}
+        {/* 업로드된 이미지 */}
+        <div className="uploaded-images">
+          {uploadBoxes.map((box, index) => (
+            <div key={box.id} className="image-group">
+              <h3>시간표 {index + 1}</h3>
+              <div className="image-row">
+                {box.files.map((file, fileIndex) => (
+                  <img
+                    key={fileIndex}
+                    src={file.src}
+                    alt={`Uploaded Timetable ${index + 1}`}
+                    className="uploaded-image"
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      
-      <div className="temp-image-container">
+          ))}
+        </div>
+
+        <div className="temp-image-container">
           <h3>공강 시간표</h3>
           {isLoading ? (
             <p>결과를 불러오는 중입니다...</p>
           ) : resultImage ? (
             <>
-              <img src={resultImage} alt="Result Timetable" className="temp-image" />
-              
-
+              <img
+                src={resultImage}
+                alt="Result Timetable"
+                className="temp-image"
+              />
             </>
           ) : (
             <p>결과를 불러올 수 없습니다.</p>
           )}
         </div>
       </div>
+
       <div className="timetable-button-container">
-      <button onClick={handleDownloadResultImage} className="download-button">
-                이미지 다운로드 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
-              </button>
+        <button onClick={handleDownloadResultImage} className="download-button">
+          이미지 다운로드{' '}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#1f1f1f"
+          >
+            <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
+          </svg>
+        </button>
       </div>
     </div>
   );

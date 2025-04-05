@@ -4,7 +4,7 @@ const CONFIG = {
   // Spring Boot server
 
   SPRING_BOOT: {
-    BASE_URL: 'http://localhost:8090/api',
+    BASE_URL: 'http://35.216.79.131:8090/api',
     ENDPOINTS: {
       LOGIN: '/member/login',
       SIGNUP: '/member/signup',
@@ -21,7 +21,7 @@ const CONFIG = {
   },
 
   EMAIL_SERVICE: {
-    BASE_URL: 'http://localhost:8090/api/email',
+    BASE_URL: 'http://35.216.79.131:8090/api/email',
     ENDPOINTS: {
       SEND_AUTH_EMAIL: '/send',
       VERIFY_EMAIL_CODE: '/auth',

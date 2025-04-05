@@ -1,6 +1,6 @@
 // src/pages/CurriculumResult.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import { addQuestionWithAI } from '../api';
@@ -8,13 +8,22 @@ import '../styles/curriculum-result.css';
 
 const CurriculumResult = () => {
   const location = useLocation();
-  const { keyword, aiResponse, addInfo } = location.state || {};
+  const { keyword, aiAddResponse} = location.state || {};
 
-  const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [aiAddResponse, setAiAddResponse] = useState('');
-  const [aiAnswer, setAiAnswer] = useState(aiResponse || '');
+  const [aiPrintResponse, setAiPrintResponse] = useState(false);
+  const [question, setQuestion] = useState('');
+
+  useEffect(() => {
+    if (aiAddResponse) {
+      console.log("ai reponse:",aiAddResponse);
+      setAiPrintResponse(aiAddResponse);
+    }
+    else{
+      console.log("result창 ai response없음");
+    }
+  }, [keyword, aiAddResponse]);
 
   const handleSearch = async () => {
     if (!question.trim()) {
@@ -24,26 +33,19 @@ const CurriculumResult = () => {
 
     setLoading(true);
     try {
-      const requestPayload = { keyword, addInfo, aiResponse, question };
-      console.log('Request Payload:', requestPayload);
+      console.log("요청은 보냄");
+      const response = await addQuestionWithAI(question);
+      console.log("요청 좋다");
 
-      console.log('keyword:', keyword);
-      console.log('additional info:', addInfo);
-      console.log('question:', question);
-      console.log('AI response:', aiResponse);
+      console.log('AI response:', response.ai_add_response);
 
-      const response = await addQuestionWithAI(requestPayload);
+      const aiAddResponse = response.ai_add_response;
+      setAiPrintResponse(aiAddResponse);
 
-      console.log('response Status Code:', response.status);
-      console.log('AI response:', response.data);
-
-      const aiAddResponse = response.data?.ai_add_response || '';
-      setAiAddResponse(aiAddResponse);
-
-      console.log('AI additional response:', aiAddResponse);
+      console.log('AI additional response:', aiPrintResponse);
     } catch (error) {
       console.error('Error during API request:', error);
-      setAiAddResponse('');
+      setAiPrintResponse('');
     } finally {
       setLoading(false);
     }
@@ -74,7 +76,7 @@ const CurriculumResult = () => {
 
         <div className="ai-response-group">
           <div className="ai-response-box">
-            {aiResponse || '커리큘럼 추천에 대한 AI 답변이 없습니다.'}
+            {aiPrintResponse || '커리큘럼 추천에 대한 AI 답변이 없습니다.'}
           </div>
         </div>
 

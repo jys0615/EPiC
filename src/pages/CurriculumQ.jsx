@@ -10,35 +10,51 @@ const CurriculumQ = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { keyword, add_info, ai_response } = location.state || {};
+  const { keyword, addInfo, aiResponse } = location.state || {};
 
-  const [interest, setInterest] = useState('');
-  const [additionalInfo, setAdditionalInfo] = useState('');
-  const [aiResponse, setAiResponse] = useState(ai_response || '');
+  const [keyword_1, setKeyword] = useState('');
+  const [addInfo_1, setAddInfo] = useState('');
+  const [aiResponse_1, setAiResponse] = useState(aiResponse || '');
   const [question, setQuestion] = useState('');
 
   useEffect(() => {
-    if (keyword) setInterest(keyword);
-    if (add_info) setAdditionalInfo(add_info);
-    if (ai_response) setAiResponse(ai_response);
-  }, [keyword, add_info, ai_response]);
+
+    if (keyword) {
+      console.log("키워드:",keyword);
+      setKeyword(keyword);
+    }
+    if (addInfo) {
+      console.log("에드 인포:",addInfo);
+      setAddInfo(addInfo);
+    }
+    else{
+      console.log("에드 인포 없음음")
+    }
+    if (aiResponse) {
+      console.log("ai reponse:",aiResponse);
+      setAiResponse(aiResponse);
+    }
+    else{
+      console.log("ai response 없어어")
+    }
+  }, [keyword, addInfo, aiResponse]);
 
   const handleSubmit = async () => {
 
-    console.log('keyword:', keyword);
-    console.log('additional info:', additionalInfo);
+    console.log('keyword:', keyword_1);
+    console.log('additional info:', addInfo_1);
     console.log('question:', question);
-    console.log('AI response:', aiResponse);
+    console.log('AI response:', aiResponse_1);
 
     try {
+      console.log("일단 요청 보냄");
       const response = await addQuestionWithAI(question);
-
+      console.log("요청 잘 받음");
+      console.log("q->result response : ",response)
       navigate('/curriculum-result', {
         state: {
-          keyword: keyword,
-          interest: interest,
-          addInfo: additionalInfo,
-          aiResponse: response.ai_response,
+          keyword: keyword_1,
+          aiAddResponse: response.ai_add_response
         },
       });
     } catch (error) {
@@ -46,10 +62,8 @@ const CurriculumQ = () => {
       alert('질문 전송 중 오류가 발생했습니다.');
       navigate('/curriculum-result', {
         state: {
-          keyword: keyword,
-          interest: interest,
-          addInfo: additionalInfo,
-          ai_response: '',
+          keyword: keyword_1,
+          aiAddResponse: ''
         },
       });
     }
@@ -79,7 +93,7 @@ const CurriculumQ = () => {
                   className="form-input"
                   placeholder="관심사"
                   id="interest-field"
-                  value={interest}
+                  value={keyword_1}
                   readOnly
                 />
               </div>
@@ -97,7 +111,7 @@ const CurriculumQ = () => {
                   className="form-input"
                   placeholder="추가 정보"
                   id="q-info-field"
-                  value={additionalInfo}
+                  value={addInfo_1}
                   readOnly
                 />
               </div>
