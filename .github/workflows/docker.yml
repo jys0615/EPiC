@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - feature/spring-connect
 
 jobs:
   docker-build:
