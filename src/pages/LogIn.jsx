@@ -51,7 +51,7 @@ const LogIn = () => {
         <div className="login-box">
           {/* <Animation text="🎓Edu Path in CS" /> */}
           
-          <div className="epic">
+          <div className="epic-logo-text">
             <h2>🎓 Edu Path in CS</h2>
           </div>
           

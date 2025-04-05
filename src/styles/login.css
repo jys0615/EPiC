@@ -8,12 +8,13 @@
   margin-top: -110px;
 }
 
-.epic h2 {
-  font-size: 38px;
+.epic-logo-text h2 {
   font-weight: bold;
   margin-bottom: 5px;
   color: var(--primary-color);
-  font-family: 'Itim', cursive;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 45px;
+  white-space: nowrap;
 }
 
 .login-box {

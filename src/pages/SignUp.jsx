@@ -78,7 +78,7 @@ const SignUp = () => {
       <div className="signup-container">
         {/* <Animation text="🎓Edu Path in CS" /> */}
         
-        <div className="epic">
+        <div className="epic-logo-text">
           <h2>🎓 Edu Path in CS</h2>
         </div>
 
@@ -102,7 +102,7 @@ const SignUp = () => {
           />
           <input
             type="text"
-            placeholder="이름"
+            placeholder="이름(실명)"
             className="input-field"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -110,17 +110,22 @@ const SignUp = () => {
           <div className="verification-container">
             <input
               type="email"
-              placeholder="이메일"
+              placeholder="경희대학교 이메일"
               className="email-field"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="verification-button" onClick={handleSendAuthEmail}>
+            <button className="verification-button"
+              placholder="인증번호 입력"
+              onClick={handleSendAuthEmail}>
               인증 메일 발송
             </button>
           </div>
           {successMessage && <div className="success-message">{successMessage}</div>}
           {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+          <div className="verification-container">
+
           <input
             type="text"
             placeholder="인증 코드"
@@ -131,6 +136,14 @@ const SignUp = () => {
           <button className="verification-button" onClick={handleVerifyEmailCode}>
             인증 코드 확인
           </button>
+        </div>
+
+        <div className="signup-button-container">
+          <button className="signup-button" onClick={handleSignUp}>
+              회원가입
+          </button>
+        </div>
+
         </div>
       </div>
     </>
