@@ -48,6 +48,7 @@
   overflow-x: auto; /* 가로 스크롤 활성화 */
   justify-content: center; /* 가운데 정렬 */
   min-height: 200px;
+  max-width: 900px;
   margin-bottom: 20px;
   margin-top: 20px;
 }
@@ -68,40 +69,46 @@
 /* 이미지 중앙 정렬 추가 */
 .uploaded-content {
   display: flex; /* 플렉스 박스 사용 */
-  width: 400px; /* 실질적 적용을 위한 추가 설정 */
-  height: 500px;
+  width: 300px; /* 실질적 적용을 위한 추가 설정 */
+  height: 200px;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
 }
 
 /* 개별 업로드 박스 */
-.upload-box {
-  /* width: 20px; */
-   /* 고정 너비 */
+.time-upload-box {
+  min-width: 220px;
   max-width: 30px;
   height: 300px;
   margin: 10px; /* 박스 간격 */
   border: 2px dashed #ccc;
   padding: 10px;
   border-radius: 8px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  justify-content: center;
 }
 
 /* 시간표 텍스트 스타일 */
-.upload-box h3 {
+.time-upload-box h3 {
   margin-top: 5px; /* 텍스트와 박스 윗부분 간격 조정 */
   margin-bottom: 15px; /* 텍스트와 드롭존 간격 조정 */
   font-size: 16px; /* 텍스트 크기 조정 */
   text-align: center; /* 텍스트 중앙 정렬 */
+  max-width: 70px;
 }
 
 /* 드롭존 스타일 */
 .dropzone {
   width: auto; /* 업로드 박스에 맞춰서 너비 조정 */
-  height: 300px; /* 업로드 박스 내부 높이에 맞춤 */
+  height: auto; /* 업로드 박스 내부 높이에 맞춤 */
   border: 2px dashed #ccc;
   text-align: center;
   background-color: #f9f9f9;
   border-radius: 8px;
+  margin-right: -55px;
+  padding: 0px;
+  max-width: 180px;
 }
 
 .dropzone.active {
@@ -111,16 +118,21 @@
 
 /* 업로드된 이미지 */
 .uploaded-image {
-  width: auto; /* 업로드 박스 너비에 맞춤 */
-  height: auto;
-  max-width: 200px;
+  /* width: auto; */
+   /* 업로드 박스 너비에 맞춤 */
+  /* height: auto; */
+  max-width: 210px;
   max-height: 300px;
+  justify-content: center;
+  max-height: 20px;
 }
 
 /* + 버튼 스타일 */
 .add-box-button {
-  width: auto; /* 버튼 크기 자동 조정 */
-  height: auto; /* 버튼 높이 자동 조정 */
+  /* width: auto; */
+   /* 버튼 크기 자동 조정 */
+  /* height: auto; */
+   /* 버튼 높이 자동 조정 */
 }
 
 .submit-button {

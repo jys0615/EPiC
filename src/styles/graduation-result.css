@@ -89,7 +89,7 @@
 }
 
 .form-group-horizontal .form-group-box p {
-  line-height: 1.5;
+  line-height: 1;
   font-size: 16px;
 }
 
@@ -133,6 +133,10 @@
   width: calc(100% - 30px);
   min-height: 75px;
   max-width: 920px;
+
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap; 
 }
 
 .grad-result-button-container {

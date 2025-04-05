@@ -56,7 +56,7 @@ const Timetable = () => {
 
       <div className="upload-box-container">
         {uploadBoxes.map((box, index) => (
-          <div key={box.id} className="upload-box">
+          <div key={box.id} className="time-upload-box">
             <h3>시간표 {index + 1}</h3>
             {box.files.length === 0 ? (
               <DropzoneBox id={box.id} onDrop={onDrop} />
