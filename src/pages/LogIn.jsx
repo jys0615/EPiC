@@ -8,14 +8,14 @@ import '@fontsource/alkatra';
 import CONFIG from '../config';
 
 const LogIn = () => {
-  const [email, setEmail] = useState('');
+  const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    console.log('이메일:', email);
+    console.log('이메일:', loginId);
     console.log('비밀번호:', password);
 
     try {
@@ -26,7 +26,7 @@ const LogIn = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ loginId, password }),
         },
       );
 
@@ -59,11 +59,11 @@ const LogIn = () => {
             <h2>로그인</h2>
           </div>
           <input
-            type="email"
+            type="loginId"
             placeholder="이메일"
             className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={loginId}
+            onChange={(e) => setLoginId(e.target.value)}
           />
           <input
             type="password"

@@ -64,7 +64,9 @@
 .form-group-horizontal {
   display: flex;
   justify-content: flex-start;
-  width: 100%;
+  width: 90%;
+  padding-right: 20px;
+  max-width: 950px;
 }
 
 .form-group-horizontal .form-group-text {
@@ -75,7 +77,20 @@
   margin-left: 6px;
 }
 
-.form-group-horizontal .form-group-box {
+.form-group-horizontal{
+  margin-left: 10px;
+  margin-right: 0px;
+  width: 100vw;
+  height: 20px;
+  border-radius: 15px;
+  text-align: left;
+  margin-top: 10px;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.form-group-box {
   margin-left: 10px;
   margin-right: 0px;
   width: 100vw;
@@ -89,7 +104,8 @@
 }
 
 .form-group-horizontal .form-group-box p {
-  line-height: 1;
+  line-height: 1.5;
+  margin-top: 0px;
   font-size: 16px;
 }
 
@@ -123,7 +139,7 @@
 .result-box {
   border: solid #ddd;
   border-radius: 8px;
-  padding: 35px;
+  padding: 0 35px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -134,9 +150,9 @@
   min-height: 75px;
   max-width: 920px;
 
-  max-height: 300px;
+  max-height: 200px;
   overflow-y: auto;
-  white-space: pre-wrap; 
+  text-align: left;
 }
 
 .grad-result-button-container {

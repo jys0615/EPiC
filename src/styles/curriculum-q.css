@@ -150,6 +150,7 @@
   height: auto;
   line-height: 1.5;
   overflow-y: auto;
+  text-align: left;
 }
 
 .question-input-group {

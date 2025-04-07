@@ -23,6 +23,7 @@ const Timetable = () => {
   const onDrop = useCallback((id, acceptedFiles) => {
     const imageFiles = acceptedFiles.map((file) => ({
       src: URL.createObjectURL(file),
+      file: file, // 실제 파일 객체 저장
     }));
 
     setUploadBoxes((prevBoxes) =>
@@ -36,6 +37,7 @@ const Timetable = () => {
     const hasFiles = uploadBoxes.every((box) => box.files.length > 0);
 
     if (hasFiles) {
+      console.log("그냥 timetable -> timetable result 전달 : ",uploadBoxes);
       navigate('/timetable-result', { state: { uploadBoxes } });
     } else {
       alert('모든 박스에 시간표를 업로드해주세요!');
@@ -103,7 +105,8 @@ const DropzoneBox = ({ id, onDrop }) => {
       {isDragActive ? (
         <p>여기에 파일을 드롭하세요...</p>
       ) : (
-        <p>파일을 드래그하거나 클릭하여 업로드하세요</p>
+        <p>파일을 드래그하거나<br/>
+        클릭하여 업로드하세요</p>
       )}
     </div>
   );

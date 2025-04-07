@@ -69,6 +69,20 @@ const CurriculumQ = () => {
     }
   };
 
+  const formatText = (text) => {
+    // 숫자(1., 2., ...) 기준으로 섹션 분리
+    const sections = text.split(/\d\.\s/);
+  
+    return sections.map((section, index) => (
+      <div key={index} style={{ marginBottom: "20px" }}>
+        {section.split("-").map((line, idx) => (
+          <p key={idx} style={{ margin: "5px 0" }}>
+            {line.trim()}
+          </p>
+        ))}
+      </div>
+    ));
+  };
   return (
     <div>
       <Header />
@@ -120,14 +134,9 @@ const CurriculumQ = () => {
         </div>
 
         <div className="ai-response-group">
-          <input
-            type="text"
-            className="ai-response-box"
-            placeholder="AI에 의한 답변이 표시됩니다."
-            id="ai-response"
-            value={aiResponse}
-            readOnly
-          />
+          <div className="ai-response-box" id="ai-response" style={{ whiteSpace: 'pre-wrap' }}>
+            {formatText(aiResponse_1)}
+          </div>
         </div>
 
         <div className="question-input-group">
