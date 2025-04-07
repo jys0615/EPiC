@@ -14,7 +14,7 @@ public class WebClientConfig {
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
-                .baseUrl(fastApiBaseUrl)
+                .baseUrl("http://localhost:8000")
                 .build();
     }
 }

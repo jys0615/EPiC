@@ -83,4 +83,36 @@ public class MemberService {
 
         //return jwtTokenProvider.generateToken(member.getLoginId(), List.of(member.getRole().name()));
     }
+
+//    public void updateLoginId(String username, LoginIdUpdateRequest request) {
+//        Member member = memberRepository.findMemberByLoginId(username)
+//                .orElseThrow(() -> new InvalidInputException("loginId", "회원 정보를 찾을 수 없습니다."));
+//
+//        if (!checkLoginIdAvailability(request.getNewLoginId())) {
+//            throw new InvalidInputException("loginId", "이미 사용 중인 아이디입니다.");
+//        }
+//
+//        member.setLoginId(request.getNewLoginId());
+//        memberMongoTemplate.save(member, "member_info");
+//    }
+
+//    public void updatePassword(String username, PasswordUpdateRequest request) {
+//        Member member = memberRepository.findMemberByLoginId(username)
+//                .orElseThrow(() -> new InvalidInputException("loginId", "회원 정보를 찾을 수 없습니다."));
+//
+//        if (!passwordEncoder.matches(request.getCurrentPassword(), member.getPassword())) {
+//            throw new InvalidInputException("currentPassword", "현재 비밀번호가 일치하지 않습니다.");
+//        }
+//
+//        String pattern = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$";
+//        if (!request.getNewPassword().matches(pattern)) {
+//            throw new InvalidInputException(
+//                    "newPassword",
+//                    "영문, 숫자, 특수문자를 포함한 8~20자리 비밀번호를 입력해주세요."
+//            );
+//        }
+//
+//        member.setPassword(passwordEncoder.encode(request.getNewPassword()));
+//        memberMongoTemplate.save(member, "member_info");
+//    }
 }

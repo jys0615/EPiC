@@ -1,5 +1,3 @@
-// common/authority/SecurityConfig.java
-
 package com.semothon.team15.semo_backend.common.authority;
 
 import org.springframework.context.annotation.Bean;
@@ -21,6 +19,7 @@ import java.util.Arrays;
 public class SecurityConfig {
 
     @Bean
+    //public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -53,6 +52,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
+
+                //.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

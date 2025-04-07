@@ -24,8 +24,8 @@ public class GraduationController {
             @RequestParam("department") String department,
             @RequestParam("studentId") String studentId
     ) {
-    GraduationCheckRequestDto requestDto = new GraduationCheckRequestDto(file, department, studentId);
-    GraduationCheckResponseDto response = graduationService.checkRequirements(requestDto);
-    return ResponseEntity.ok(response);
-}
+        GraduationCheckRequestDto requestDto = new GraduationCheckRequestDto(file, department, studentId);
+        GraduationCheckResponseDto response = graduationService.checkRequirements(requestDto);
+        return ResponseEntity.ok(response);
+    }
 }

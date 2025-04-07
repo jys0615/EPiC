@@ -15,11 +15,15 @@ public class QuestionService {
     }
 
     public QuestionResponseDto askAdditionalQuestion(QuestionRequestDto requestDto) {
-        return webClient.post()
+        System.out.println("🔵ㄹㄹㄹㄹ [Spring Controller] Received DTO: {}"+ requestDto.getQuestion());
+        try{return webClient.post()
                 .uri("/chat")
                 .bodyValue(requestDto)
                 .retrieve()
                 .bodyToMono(QuestionResponseDto.class)
                 .block();
+    }catch (Exception ex) {
+            throw new RuntimeException("Failed to call external API", ex);
+        }
     }
 }
