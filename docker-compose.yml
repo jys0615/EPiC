@@ -1,0 +1,44 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  ai:
+    build:
+      context: ./ai
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - timetable_output:/app/output
+    restart: unless-stopped
+
+  be:
+    build:
+      context: ./be
+    ports:
+      - "8090:8090"
+    env_file:
+      - .env
+    environment:
+      REDIS_HOST: redis
+      FASTAPI_URL: http://ai:8000
+    depends_on:
+      - redis
+      - ai
+    restart: unless-stopped
+
+  fe:
+    build:
+      context: ./fe
+    ports:
+      - "80:80"
+    depends_on:
+      - be
+    restart: unless-stopped
+
+volumes:
+  timetable_output:

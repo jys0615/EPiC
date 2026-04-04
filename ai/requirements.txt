@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+openai
+python-dotenv
+pdfplumber
+numpy
+opencv-python-headless
+pytesseract
+python-multipart

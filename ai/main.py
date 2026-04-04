@@ -253,7 +253,7 @@ import os
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import FileResponse
 from tempfile import NamedTemporaryFile
-pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_CMD", "/usr/bin/tesseract")
 
 # 텍스트 인식 후 이미지 크기 조정
 def preprocess_and_resize(img):

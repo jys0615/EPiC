@@ -1,0 +1,37 @@
+name: Build & Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up commit SHA
+        run: echo "GIT_COMMIT=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+
+      - name: Build & push BE image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/epic-be:${{ env.GIT_COMMIT }} ./be
+          docker tag ${{ secrets.DOCKER_USERNAME }}/epic-be:${{ env.GIT_COMMIT }} ${{ secrets.DOCKER_USERNAME }}/epic-be:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/epic-be:${{ env.GIT_COMMIT }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/epic-be:latest
+
+      - name: Build & push FE image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ env.GIT_COMMIT }} ./fe
+          docker tag ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ env.GIT_COMMIT }} ${{ secrets.DOCKER_USERNAME }}/epic-fe:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ env.GIT_COMMIT }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/epic-fe:latest
