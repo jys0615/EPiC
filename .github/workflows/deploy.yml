@@ -6,50 +6,134 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-be:
     runs-on: ubuntu-latest
-
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if BE changed
+        id: check
+        run: |
+          if git diff --name-only HEAD~1 HEAD | grep -q '^be/'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Log in to DockerHub
+        if: steps.check.outputs.changed == 'true'
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set up commit SHA
-        run: echo "GIT_COMMIT=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+      - name: Set up Docker Buildx
+        if: steps.check.outputs.changed == 'true'
+        uses: docker/setup-buildx-action@v3
 
       - name: Build & push BE image
+        if: steps.check.outputs.changed == 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: ./be
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/epic-be:latest
+            ${{ secrets.DOCKER_USERNAME }}/epic-be:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/epic-be:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/epic-be:buildcache,mode=max
+
+  build-fe:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if FE changed
+        id: check
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/epic-be:${{ env.GIT_COMMIT }} ./be
-          docker tag ${{ secrets.DOCKER_USERNAME }}/epic-be:${{ env.GIT_COMMIT }} ${{ secrets.DOCKER_USERNAME }}/epic-be:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/epic-be:${{ env.GIT_COMMIT }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/epic-be:latest
+          if git diff --name-only HEAD~1 HEAD | grep -qE '^fe/'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Log in to DockerHub
+        if: steps.check.outputs.changed == 'true'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up Docker Buildx
+        if: steps.check.outputs.changed == 'true'
+        uses: docker/setup-buildx-action@v3
 
       - name: Build & push FE image
+        if: steps.check.outputs.changed == 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: ./fe
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/epic-fe:latest
+            ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/epic-fe:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/epic-fe:buildcache,mode=max
+
+  build-ai:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if AI changed
+        id: check
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ env.GIT_COMMIT }} ./fe
-          docker tag ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ env.GIT_COMMIT }} ${{ secrets.DOCKER_USERNAME }}/epic-fe:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ env.GIT_COMMIT }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/epic-fe:latest
+          if git diff --name-only HEAD~1 HEAD | grep -q '^ai/'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Log in to DockerHub
+        if: steps.check.outputs.changed == 'true'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up Docker Buildx
+        if: steps.check.outputs.changed == 'true'
+        uses: docker/setup-buildx-action@v3
 
       - name: Build & push AI image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/epic-ai:${{ env.GIT_COMMIT }} ./ai
-          docker tag ${{ secrets.DOCKER_USERNAME }}/epic-ai:${{ env.GIT_COMMIT }} ${{ secrets.DOCKER_USERNAME }}/epic-ai:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/epic-ai:${{ env.GIT_COMMIT }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/epic-ai:latest
+        if: steps.check.outputs.changed == 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: ./ai
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/epic-ai:latest
+            ${{ secrets.DOCKER_USERNAME }}/epic-ai:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/epic-ai:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/epic-ai:buildcache,mode=max
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build-and-push
-
+    needs: [build-be, build-fe, build-ai]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Copy docker-compose to server
         uses: appleboy/scp-action@v0.1.7
