@@ -226,3 +226,21 @@ uvicorn main:app --reload
 ## 🔓 License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+---
+
+<div align="center">
+
+<br>
+
+*제1회 세모톤 최우수상 🏆*
+
+<img src="./docs/victory_shot.png" width="60%">
+
+<br>
+
+*함께해줘서 고마워요 💙*
+
+<br>
+
+</div>
