@@ -1,0 +1,48 @@
+# ======================
+# 공통
+# ======================
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+
+# ======================
+# AI (Python / FastAPI)
+# ======================
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# AI 분석 결과물 (output 이미지)
+ai/output/
+
+# ======================
+# BE (Spring Boot / Gradle)
+# ======================
+be/.gradle/
+be/build/
+be/bin/
+be/out/
+
+# IDE
+be/.idea/
+be/*.iws
+be/*.iml
+be/*.ipr
+be/.vscode/
+
+# Spring
+be/HELP.md
+
+# ======================
+# FE (React / Vite / Node)
+# ======================
+fe/node_modules/
+fe/dist/
+fe/dist-ssr/
+fe/.vscode/
+fe/*.local
