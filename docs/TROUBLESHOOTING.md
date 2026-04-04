@@ -76,3 +76,61 @@
 **해결:** Azure for Students 사용
 - 학교 이메일로 $100 크레딧 신청 (신용카드 불필요)
 - Standard_B1s VM (1 vCPU / 1GB RAM) 생성, Static IP 할당으로 VM 재시작 시 IP 변경 방지
+
+---
+
+## 7. Vite 기본 CSS로 인한 전체 레이아웃 쏠림
+
+**증상:** 모든 페이지 콘텐츠가 왼쪽으로 쏠리고 배경이 어두운 보라색으로 표시됨
+
+**원인:** Vite 기본 템플릿의 `src/index.css`가 그대로 남아 있어 아래 규칙이 전역 적용됨
+- `body { display: flex; place-items: center }` → `#root`가 콘텐츠 너비만 차지
+- `background-color: #242424` → 어두운 배경
+- `color: rgba(255,255,255,0.87)` → 흰색 텍스트
+
+**해결:** `src/index.css` 전면 교체
+- `body { display: flex }` 제거
+- `#root { display: block; width: 100% }` 명시
+- 배경/텍스트 색상을 프로젝트에 맞게 재설정
+
+---
+
+## 8. CI/CD 배포 후 컨테이너 미갱신
+
+**증상:** GitHub Actions 빌드 성공 후에도 서버에서 이전 버전이 계속 실행됨
+
+**원인:** docker-compose v1.29.2의 `up -d`는 DockerHub에 새 이미지가 올라와도 실행 중인 컨테이너를 자동으로 재생성하지 않음
+
+**해결:** 배포 스크립트를 `down → up` 방식으로 변경
+```bash
+docker-compose pull
+docker-compose down
+docker-compose up -d
+```
+컨테이너를 항상 완전히 재생성하여 새 이미지가 무조건 반영되도록 함
+
+---
+
+## 9. docker-compose restart 시 환경변수 미반영
+
+**증상:** `.env` 파일 수정 후 `docker-compose restart`를 실행해도 변경사항이 적용되지 않음
+
+**원인:** `restart`는 컨테이너를 재시작하지만 환경변수는 컨테이너 생성 시점에 주입되므로 재시작만으로는 갱신되지 않음
+
+**해결:** `restart` 대신 컨테이너 재생성 사용
+```bash
+docker-compose down && docker-compose up -d
+```
+
+---
+
+## 10. OpenAI API Key 401 오류
+
+**증상:** 졸업 요건 / 커리큘럼 기능에서 `Error code: 401 - invalid_api_key` 발생
+
+**원인:** `.env`의 `OPENAI_API_KEY` 값이 만료되었거나 잘못된 키로 설정됨
+
+**해결:**
+1. [platform.openai.com/api-keys](https://platform.openai.com/api-keys)에서 새 키 발급
+2. 서버의 `.env` 파일에서 `OPENAI_API_KEY` 값 교체
+3. `docker-compose down && docker-compose up -d` 로 재시작 (`restart` 명령은 env 미반영)
