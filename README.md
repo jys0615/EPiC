@@ -54,6 +54,16 @@ UI/UX 디자인은 Figma로 작업되었습니다.
 
 <br>
 
+## 📦 Original Repositories
+
+| Service | Repository |
+|---------|------------|
+| Frontend | [2025_TEAM_15_FE](https://github.com/semothon/2025_TEAM_15_FE) |
+| Backend | [2025_TEAM_15_BE](https://github.com/semothon/2025_TEAM_15_BE) |
+| AI | [2025_TEAM_15_AI](https://github.com/semothon/2025_TEAM_15_AI) |
+
+<br>
+
 ## 🧩 Project Architecture
 
 <img src="./docs/architecture.svg" width=100%>
