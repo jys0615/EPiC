@@ -3,8 +3,11 @@
 @import './theme.css';
 
 .graduation-result-intro {
+  max-width: 1020px;
+  width: 100%;
+  margin: 0 auto 15px;
   padding-top: calc(var(--header-height) + 20px);
-  margin-bottom: 15px;
+  text-align: left;
 }
 
 .graduation-title {
@@ -29,7 +32,7 @@
   border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin: 0 auto 15px;
   padding: 20px 30px;
   align-items: flex-start;
   border-radius: 16px;

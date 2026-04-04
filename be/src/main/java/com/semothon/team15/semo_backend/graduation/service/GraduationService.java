@@ -2,6 +2,7 @@ package com.semothon.team15.semo_backend.graduation.service;
 
 import com.semothon.team15.semo_backend.graduation.dto.GraduationCheckRequestDto;
 import com.semothon.team15.semo_backend.graduation.dto.GraduationCheckResponseDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class GraduationService {
+
+    @Value("${fastapi.url}")
+    private String fastapiUrl;
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -60,7 +64,7 @@ public class GraduationService {
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
             // 🔹 FastAPI 서버 URL
-            String fastApiUrl = "http://localhost:8000/analyze-pdf";
+            String fastApiUrl = fastapiUrl + "/analyze-pdf";
 
             // 🔹 요청 전송
             ResponseEntity<GraduationCheckResponseDto> response = restTemplate.postForEntity(
