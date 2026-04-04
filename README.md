@@ -215,6 +215,14 @@ uvicorn main:app --reload
 
 <br>
 
+## 🔨 Refactoring Plan
+
+성능·보안·품질 향상을 위한 리팩토링 계획을 정리하였습니다.
+
+<a href="./docs/REFACTORING_PLAN.md" target="_blank">👉 리팩토링 계획 보기</a>
+
+<br>
+
 ## 🛠️ Troubleshooting
 
 개발 및 배포 과정에서 발생한 주요 이슈와 해결 방법을 정리하였습니다.
