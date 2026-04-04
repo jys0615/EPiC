@@ -3,7 +3,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import epiclogo from '../assets/epic-logo.svg';
 import epiclogopng from '../assets/epiclogo.png';
 const LogoImage = () => {
 

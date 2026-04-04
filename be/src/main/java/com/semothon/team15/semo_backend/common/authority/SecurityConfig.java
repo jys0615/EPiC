@@ -19,7 +19,6 @@ import java.util.Arrays;
 public class SecurityConfig {
 
     @Bean
-    //public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -53,15 +52,13 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
-                //.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-	config.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8000", "http://35.216.79.131:5173", "http://35.216.79.131:8000", "http://35.216.79.131:80"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8000", "http://35.216.79.131:5173", "http://35.216.79.131:8000", "http://35.216.79.131:80"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("*"));
         config.setAllowCredentials(true);

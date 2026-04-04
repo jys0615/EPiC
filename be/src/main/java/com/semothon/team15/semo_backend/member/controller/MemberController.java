@@ -1,15 +1,12 @@
 package com.semothon.team15.semo_backend.member.controller;
 
 import com.semothon.team15.semo_backend.common.dto.BaseResponse;
-import com.semothon.team15.semo_backend.common.exception.InvalidInputException;
 import com.semothon.team15.semo_backend.member.dto.*;
-import com.semothon.team15.semo_backend.member.entity.MemberEntity;
 import com.semothon.team15.semo_backend.member.service.EmailService;
 import com.semothon.team15.semo_backend.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -105,56 +102,4 @@ public class MemberController {
                 )
         );
     }
-
-//    @GetMapping("/my-info")
-//    public ResponseEntity<BaseResponse<MemberDto>> getMyInfo(@AuthenticationPrincipal String username) {
-//        MemberEntity member = memberService.getMemberByLoginId(username)
-//                .orElseThrow(() -> new InvalidInputException("loginId", "회원 정보를 찾을 수 없습니다."));
-//
-//        MemberDto response = new MemberDto(
-//                member.getLoginId(),
-//                member.getName(),
-//                member.getEmail(),
-//        );
-//
-//        return ResponseEntity.ok(
-//                new BaseResponse<>(
-//                        "SUCCESS",
-//                        response,
-//                        "회원 정보 조회 성공"
-//                )
-//        );
-//    }
-
-//    @PutMapping("/my-info/login-id")
-//    public ResponseEntity<BaseResponse<Void>> updateLoginId(
-//            @AuthenticationPrincipal String username,
-//            @Valid @RequestBody LoginIdUpdateRequest request) {
-//
-//        memberService.updateLoginId(username, request);
-//
-//        return ResponseEntity.ok(
-//                new BaseResponse<>(
-//                        "SUCCESS",
-//                        null,
-//                        "로그인 아이디가 성공적으로 변경되었습니다."
-//                )
-//        );
-//    }
-//
-//    @PutMapping("/my-info/password")
-//    public ResponseEntity<BaseResponse<Void>> updatePassword(
-//            @AuthenticationPrincipal String username,
-//            @RequestBody PasswordUpdateRequest request) {
-//
-//        memberService.updatePassword(username, request);
-//
-//        return ResponseEntity.ok(
-//                new BaseResponse<>(
-//                        "SUCCESS",
-//                        null,
-//                        "비밀번호가 성공적으로 변경되었습니다."
-//                )
-//        );
-//    }
 }

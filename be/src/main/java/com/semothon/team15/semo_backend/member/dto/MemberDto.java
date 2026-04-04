@@ -1,6 +1,5 @@
 package com.semothon.team15.semo_backend.member.dto;
 
-import com.semothon.team15.semo_backend.common.status.ROLE;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -27,10 +26,6 @@ public class MemberDto {
     @Email
     @JsonProperty("email")
     private String email;
-
-//    @ValidEnum(enumClass = ROLE.class, message = "유효하지 않은 ROLE 값입니다.")
-//    @JsonProperty("role")
-//    private ROLE role;
 
     // Getters and Setters
     public String getLoginId() {
@@ -64,12 +59,4 @@ public class MemberDto {
     public void setEmail(String email) {
         this.email = email;
     }
-
-//    public ROLE getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(ROLE role) {
-//        this.role = role;
-//    }
 }
