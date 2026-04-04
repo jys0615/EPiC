@@ -125,6 +125,14 @@ uvicorn main:app --reload
 
 <br>
 
+## 🛠️ Troubleshooting
+
+개발 및 배포 과정에서 발생한 주요 이슈와 해결 방법을 정리하였습니다.
+
+<a href="./docs/TROUBLESHOOTING.md" target="_blank">👉 트러블슈팅 보기</a>
+
+<br>
+
 ## 🔓 License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
