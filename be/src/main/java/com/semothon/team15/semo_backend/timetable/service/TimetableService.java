@@ -53,3 +53,6 @@ public class TimetableService {
         }
     }
 }
+/*
+WebClient는 비동기가 기본이지만, .block() 메서드로 동기처럼 사용이 가능.
+*/

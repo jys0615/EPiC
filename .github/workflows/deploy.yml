@@ -35,3 +35,10 @@ jobs:
           docker tag ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ env.GIT_COMMIT }} ${{ secrets.DOCKER_USERNAME }}/epic-fe:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/epic-fe:${{ env.GIT_COMMIT }}
           docker push ${{ secrets.DOCKER_USERNAME }}/epic-fe:latest
+
+      - name: Build & push AI image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/epic-ai:${{ env.GIT_COMMIT }} ./ai
+          docker tag ${{ secrets.DOCKER_USERNAME }}/epic-ai:${{ env.GIT_COMMIT }} ${{ secrets.DOCKER_USERNAME }}/epic-ai:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/epic-ai:${{ env.GIT_COMMIT }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/epic-ai:latest
