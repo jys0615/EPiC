@@ -1,5 +1,7 @@
 package com.semothon.team15.semo_backend.member.service;
 
+import com.semothon.team15.semo_backend.common.exception.CustomException;
+import com.semothon.team15.semo_backend.common.status.ErrorCode;
 import com.semothon.team15.semo_backend.common.status.ROLE;
 import com.semothon.team15.semo_backend.member.dto.*;
 import com.semothon.team15.semo_backend.member.entity.MemberEntity;
@@ -36,16 +38,9 @@ public class MemberService {
         return memberRepository.isLoginIdAvailable(loginId);
     }
 
-    public String signUp(MemberDto memberDto) {
-        if (memberDto.getLoginId().isBlank() ||
-                memberDto.getPassword().isBlank() ||
-                memberDto.getName().isBlank() ||
-                memberDto.getEmail().isBlank()) {
-            return "필수 입력값이 누락되었습니다.";
-        }
-
+    public void signUp(MemberDto memberDto) {
         if (!checkLoginIdAvailability(memberDto.getLoginId())) {
-            return "이미 등록된 아이디입니다.";
+            throw new CustomException(ErrorCode.DUPLICATE_LOGIN_ID, "이미 등록된 아이디입니다.");
         }
 
         MemberEntity member = new MemberEntity(
@@ -54,25 +49,17 @@ public class MemberService {
                 passwordEncoder.encode(memberDto.getPassword()),
                 memberDto.getName(),
                 memberDto.getEmail(),
-                ROLE.MEMBER
-        );
+                ROLE.MEMBER);
 
         memberMongoTemplate.save(member, "member_info");
-        return "회원가입이 완료되었습니다.";
     }
 
-    public String login(LoginDto loginDto) {
-        if (loginDto.getLoginId().isBlank() || loginDto.getPassword().isBlank()) {
-            return "로그인 아이디와 비밀번호를 입력해주세요.";
-        }
-
+    public void login(LoginDto loginDto) {
         Query query = new Query(Criteria.where("loginId").is(loginDto.getLoginId()));
         MemberEntity member = memberMongoTemplate.findOne(query, MemberEntity.class, "member_info");
 
-        System.out.println(member);
         if (member == null || !passwordEncoder.matches(loginDto.getPassword(), member.getPassword())) {
-            return "로그인 정보가 일치하지 않습니다.";
+            throw new CustomException(ErrorCode.UNAUTHORIZED, "로그인 정보가 일치하지 않습니다.");
         }
-        return "로그인 성공";
     }
 }
