@@ -1,10 +1,8 @@
 // src/config.js
 
 const CONFIG = {
-  // Spring Boot server
-
   SPRING_BOOT: {
-    BASE_URL: 'http://localhost:8090/api',
+    BASE_URL: '/api',
     ENDPOINTS: {
       LOGIN: '/member/login',
       SIGNUP: '/member/signup',
@@ -21,19 +19,10 @@ const CONFIG = {
   },
 
   EMAIL_SERVICE: {
-    BASE_URL: 'http://localhost:8090/api/email',
+    BASE_URL: '/api/email',
     ENDPOINTS: {
       SEND_AUTH_EMAIL: '/send',
       VERIFY_EMAIL_CODE: '/auth',
-    },
-  },
-
-  // FastAPI AI server
-  FAST_API: {
-    BASE_URL: 'http://localhost:8000',
-    ENDPOINTS: {
-      RECOMMEND: '/recommend',
-      CHAT: '/chat',
     },
   },
 };

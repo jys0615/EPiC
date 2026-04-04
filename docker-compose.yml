@@ -6,8 +6,7 @@ services:
     restart: unless-stopped
 
   ai:
-    build:
-      context: ./ai
+    image: ${DOCKER_USERNAME}/epic-ai:latest
     ports:
       - "8000:8000"
     env_file:
@@ -17,8 +16,7 @@ services:
     restart: unless-stopped
 
   be:
-    build:
-      context: ./be
+    image: ${DOCKER_USERNAME}/epic-be:latest
     ports:
       - "8090:8090"
     env_file:
@@ -32,8 +30,7 @@ services:
     restart: unless-stopped
 
   fe:
-    build:
-      context: ./fe
+    image: ${DOCKER_USERNAME}/epic-fe:latest
     ports:
       - "80:80"
     depends_on:

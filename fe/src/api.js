@@ -8,11 +8,6 @@ export const springApi = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-export const fastApi = axios.create({
-  baseURL: CONFIG.FAST_API.BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
-});
-
 export const fetchRecommendedCurriculum = async (keyword, add_info) => {
   const response = await springApi.post(CONFIG.SPRING_BOOT.ENDPOINTS.RECOMMEND, { keyword, add_info });
   return response.data;
