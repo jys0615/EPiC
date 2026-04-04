@@ -1,80 +1,55 @@
 /* src/styles/welcome.css */
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+@import './theme.css';
 
 .welcome-container {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-  text-align: center;
-  background-color: white;
+  background-color: #ffffff;
+  padding: 40px 20px;
   box-sizing: border-box;
-}
-
-.top-logo {
-  width: 100%;
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: flex-start;
-  padding-left: 20px;
 }
 
 .central-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 16px;
   width: 100%;
-  padding: 0 1rem;
-  box-sizing: border-box;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .epic-animation {
-  text-align: center;
   color: var(--primary-color);
-  z-index: 10;
   font-family: "Baloo 2", sans-serif;
   font-size: clamp(28px, 6vw, 38px);
 }
 
-.welcome-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .welcome-text h2 {
   color: rgb(76, 69, 69);
-  margin-bottom: 0;
-  margin-top: 0;
+  margin: 0;
   font-size: clamp(16px, 2.5vw, 20px);
+  text-align: center;
 }
 
 .welcome-description {
-  max-width: 600px;
   width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
   color: #555;
-  font-size: clamp(14px, 2vw, 1.2rem);
 }
 
 .welcome-description p {
   text-align: center;
   line-height: 1.8;
   font-size: clamp(15px, 2.5vw, 20px);
+  margin: 0;
 }
 
 .welcome-buttons {
@@ -93,16 +68,7 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: clamp(140px, 20vw, 180px);
-}
-
-.btn-signin {
-  background-color: var(--khu-color);
-  color: white;
-  border: none;
-}
-
-.btn-signin:hover {
-  background-color: var(--border-color);
+  text-align: center;
 }
 
 .btn-signup {
@@ -112,5 +78,15 @@ body {
 }
 
 .btn-signup:hover {
-  background-color: var(--border-color);
+  background-color: var(--primary-hover-color);
+}
+
+.btn-signin {
+  background-color: var(--khu-color);
+  color: white;
+  border: none;
+}
+
+.btn-signin:hover {
+  background-color: #7a2120;
 }
