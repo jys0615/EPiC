@@ -33,6 +33,14 @@
 
 <br>
 
+## 🎨 Design
+
+UI/UX 디자인은 Figma로 작업되었습니다.
+
+👉 [Figma 디자인 보기](https://www.figma.com/design/onpqT8lZaHGU02H0o5rusR/semothon-team15?node-id=16-32&t=esO1IyiRnIBB927e-0)
+
+<br>
+
 ## 👥 Team Members
 
 | Name   | Department    | Role   | GitHub |
@@ -56,11 +64,27 @@
 
 **Backend**
 
-<img src="https://drive.google.com/uc?id=1xLt3xNZIqAiWtt8EKir6KhAwrI-ezfxh" width=70%>
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-FF4438?style=for-the-badge&logo=redis&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
+![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)
 
 **Frontend**
 
-<img src="https://drive.google.com/uc?id=1IWIKrc-pRCDMB3wws-T0hmTtXNfdv_W4" width=65%>
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
+
+**DevOps**
+
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
 
 <br>
 
@@ -71,21 +95,28 @@ git clone https://github.com/jys0615/EPiC.git
 cd EPiC
 ```
 
-**Backend**
+**Docker로 전체 실행 (권장)**
+```bash
+docker-compose up --build
+```
+
+**개별 실행**
+
+Backend
 ```bash
 cd be
 ./gradlew build
 ./gradlew bootRun
 ```
 
-**Frontend**
+Frontend
 ```bash
 cd fe
 npm install
 npm run dev
 ```
 
-**AI**
+AI
 ```bash
 cd ai
 pip install -r requirements.txt
