@@ -1,0 +1,100 @@
+/* src/styles/header.css */
+
+@import './theme.css';
+
+.header-container {
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.app-name {
+  font-size: 35px;
+  /* font-family: 'Alkatra', sans-serif; */
+  /* font-family: 'Noto Sans', sans-serif; */
+  font-family: "Lexend", sans-serif;
+  /* font-weight: 700; */
+  font-weight: 700;
+  color: var(--khu-color);
+  margin-left: 0px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.app-name:hover {
+  color: #a74c46;
+}
+
+.logo-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-image png {
+  width: 10px;
+  height: 8px;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #485996;
+}
+
+.account-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  background-color: var(--account-color);
+  border-radius: 60%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 8px;
+  margin-right: 10px;
+}
+
+.account-btn:hover {
+  background-color: #a67c4e;
+}
+
+.account-icon {
+  font-size: 30px;
+  color: white;
+}
+
+.account-icon:hover {
+  color: #ffcc66;
+}

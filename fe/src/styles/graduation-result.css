@@ -1,0 +1,185 @@
+/* src/styles/graduation-result.css */
+
+@import './theme.css';
+
+.graduation-result-intro{
+  padding-top: 55px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.graduation-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  margin-top: 1%;
+}
+
+.graduation-description {
+  font-size: 18px;
+  color: #666;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+
+.graduation-container {
+  width: 100%;
+  max-width: 1020px;
+  min-width: 600px;
+  max-height: 500px;
+  /* margin: 0 auto; */
+  height: 60vh;
+  max-height: 350px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding-right: -10px;
+  padding-bottom: 0px;
+  margin-bottom: 15px;
+  padding-right: 30px;
+  align-items: left;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+  margin-bottom: 30px;
+  margin-top: 5px;
+  padding-bottom: 5px;
+}
+
+.info-section-title{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.info-section-title p {
+  margin-bottom: 0px;
+}
+
+.form-group-horizontal {
+  display: flex;
+  justify-content: flex-start;
+  width: 90%;
+  padding-right: 20px;
+  max-width: 950px;
+}
+
+.form-group-horizontal .form-group-text {
+  display: flex;
+  font-size: 16px;
+  padding-right: 0px;
+  text-align: center;
+  margin-left: 6px;
+}
+
+.form-group-horizontal{
+  margin-left: 10px;
+  margin-right: 0px;
+  width: 100vw;
+  height: 20px;
+  border-radius: 15px;
+  text-align: left;
+  margin-top: 10px;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.form-group-box {
+  margin-left: 10px;
+  margin-right: 0px;
+  width: 100vw;
+  height: 20px;
+  border-radius: 15px;
+  text-align: left;
+  margin-top: 10px;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.form-group-horizontal .form-group-box p {
+  line-height: 1.5;
+  margin-top: 0px;
+  font-size: 16px;
+}
+
+.form-group-text {
+  max-width: 10%;
+  margin-left: 3px;
+}
+
+.form-group-box {
+  border: 1px solid #ddd;
+  max-width: 350px;
+  margin-left: 0px;
+  margin-right: 25px;
+}
+
+#department-title {
+  margin-right: 0px;
+}
+
+#studentId-title {
+  margin-left: 5px;
+  margin-right: -10px;
+}
+
+.result-section {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  width: 95%;
+}
+
+.result-box {
+  border: solid #ddd;
+  border-radius: 8px;
+  padding: 0 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 15px;
+  margin-right: 25px;
+  width: calc(100% - 30px);
+  min-height: 75px;
+  max-width: 920px;
+
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.grad-result-button-container {
+  margin-top: 15px;
+  max-width: 1000px;
+  max-height: 300px;
+}
+
+.grad-result-submit-button {
+  width: 100%;
+  padding: 10px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  height: 42px;
+  margin-left: 50px;
+  margin-bottom: -10px;
+  min-height: 50px;
+}
+
+.grad-result-submit-button:hover {
+  background-color: var(--primary-hover-color);
+}

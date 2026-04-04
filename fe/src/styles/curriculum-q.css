@@ -1,0 +1,194 @@
+/* src/styles/curriculum-q.css */
+
+@import './theme.css';
+
+.curriculum-intro {
+  width: 80vw;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 4%;
+  margin-bottom: 2%;
+}
+
+.curriculum-container {
+  width: 80vw;
+  max-width: 1500px;
+  min-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 20px 20px;
+  align-items: left;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 2%;
+  max-height: 400px;
+}
+
+.curriculum-title {
+  font-size: 27px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.curriculum-description {
+  font-size: 18px;
+  color: #666;
+  text-align: left;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 20px;
+  text-align: left;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  margin-right: 25px;
+  margin-left: 5px;
+  flex: 0 0 auto;
+}
+
+.prev-info-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0px;
+  margin-bottom: 8px;
+}
+
+.prev-info-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  width: 90%;
+  min-width: 50px;
+}
+
+.form-group-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 43px;
+  width: 130%;
+}
+
+.form-group-text {
+  font-size: 16px;
+  width: 50px;
+  text-align: left;
+  margin-left: 3;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 350px;
+}
+
+.form-input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  padding-right: 5px;
+}
+
+#interest-field {
+  margin-right: 20px;
+}
+
+#q-info-text {
+  margin-left: 35px;
+  margin-right: -5px;
+}
+
+#q-info-field {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.form-input::placeholder {
+  text-align: left;
+  color: #888;
+}
+
+.ai-response-group {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+.ai-response-box {
+  width: 96%;
+  padding: 20px;
+  margin-top: 0%;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-size: 16px;
+  color: black;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  word-wrap: break-word;
+  max-height: 170px;
+  height: auto;
+  line-height: 1.5;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.question-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+  margin-bottom: 3%;
+}
+
+.question-input {
+  width: 100%;
+  height: 24px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 24px;
+}
+
+.search-button {
+  padding: 9px 17px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  height: 42px;
+}
+
+.search-button:hover {
+  background-color: var(--primary-hover-color);
+}

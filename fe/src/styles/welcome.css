@@ -1,0 +1,129 @@
+/* src/styles/welcome.css */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 100%;
+  height: 100%;
+  width: 100vw;
+  text-align: center;
+  background-color: white;
+  box-sizing: border-box;
+  margin-top: -130px;
+}
+
+.top-logo {
+  width: 100%;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.central-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 80px;
+  position: relative;
+}
+
+.epic-animation {
+  text-align: center;
+  color: var(--primary-color);
+  z-index: 10;
+  margin-top: -10px;
+  font-family: 'Itim', cursive;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 38px;
+  margin-bottom: -10px;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40px;
+  margin-bottom: -25px;
+}
+
+.welcome-text h2 {
+  /* color: var(--primary-color); */
+  color: rgb(76, 69, 69);
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.welcome-description {
+  max-width: 100%;
+  width: 100%;
+  margin-top: -45px;
+  margin-bottom: -5px;
+  color: #555;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.welcome-description p {
+  text-align: center;
+  line-height: 1.8;
+  font-size: 20px;
+}
+
+.welcome-buttons {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 180px;
+}
+
+.btn-signin {
+  background-color: var(--khu-color);
+  color: white;
+  border: none;
+}
+
+.btn-signin:hover {
+  background-color: var(--border-color);
+}
+
+.btn-signup {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.btn-signup:hover {
+  background-color: var(--border-color);
+}

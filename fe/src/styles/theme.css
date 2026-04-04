@@ -1,0 +1,17 @@
+/* src/styles/theme.css */
+
+:root {
+  --primary-color: #29396e;
+  --primary-hover-color: #2d5399;
+  --khu-color: #8f2926;
+  --account-color: #855837;
+  --border-color: #dbdbdb;
+  --secondary-hover-color: #dbdbdb;
+  --placeholder-color: #7a7777;
+  --primary-font: 'IBM Plex Sans KR', sans-serif;
+  --noto-sans-font: "Noto Sans", "Noto Sans KR", sans-serif;
+}
+
+body {
+  font-family: var(--primary-font);
+}
