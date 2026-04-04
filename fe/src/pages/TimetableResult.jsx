@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom'; // 데이터 전달받기 위한
 import { getTimetable } from '../api';
 import Header from '../components/Header';
 import '../styles/timetable-result.css';
-import CONFIG from '../config';
 
 const TimetableResult = () => {
   const location = useLocation(); // 이전 페이지에서 전달된 state 접근
@@ -98,7 +97,7 @@ const TimetableResult = () => {
             <p>결과를 불러오는 중입니다...</p>
           ) : resultImage ? (
             <>
-              <img src={`${CONFIG.FAST_API.BASE_URL}/${resultImage}`} alt="Result Timetable" className="temp-image" />
+              <img src={resultImage} alt="Result Timetable" className="temp-image" />
               {/* <button onClick={handleDownloadResultImage} className="download-button">
                 이미지 다운로드
               </button> */}

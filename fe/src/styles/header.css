@@ -3,14 +3,13 @@
 @import './theme.css';
 
 .header-container {
-  background-color: transparent;
+  background-color: white;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 100;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: visible;
 }
 
 .header-content {
@@ -19,39 +18,24 @@
   align-items: center;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 16px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 14px 24px;
+  height: var(--header-height);
+  box-sizing: border-box;
 }
 
 .app-name {
-  font-size: 35px;
-  /* font-family: 'Alkatra', sans-serif; */
-  /* font-family: 'Noto Sans', sans-serif; */
+  font-size: clamp(24px, 3vw, 35px);
   font-family: "Lexend", sans-serif;
-  /* font-weight: 700; */
   font-weight: 700;
   color: var(--khu-color);
-  margin-left: 0px;
   text-decoration: none;
   letter-spacing: 1px;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .app-name:hover {
   color: #a74c46;
-}
-
-.logo-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo-image png {
-  width: 10px;
-  height: 8px;
-  object-fit: contain;
 }
 
 .nav-links {
@@ -61,11 +45,12 @@
 }
 
 .nav-link {
-  font-size: 16px;
+  font-size: clamp(13px, 1.5vw, 16px);
   font-weight: 500;
   color: #333;
   text-decoration: none;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -76,14 +61,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   background-color: var(--account-color);
-  border-radius: 60%;
+  border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-left: 8px;
-  margin-right: 10px;
+  flex-shrink: 0;
 }
 
 .account-btn:hover {
@@ -91,10 +76,13 @@
 }
 
 .account-icon {
-  font-size: 30px;
+  font-size: 22px;
   color: white;
 }
 
-.account-icon:hover {
-  color: #ffcc66;
+/* 모바일: nav 링크 숨기기 */
+@media (max-width: 600px) {
+  .nav-links {
+    display: none;
+  }
 }

@@ -1,22 +1,23 @@
+/* src/styles/timetable-result.css */
+
+@import './theme.css';
+
 .timetable-intro {
-  text-align: left; /* 왼쪽 정렬 */
-  margin-top: 50px;
+  text-align: left;
+  margin-top: calc(var(--header-height) + 20px);
   margin-left: 10px;
   margin-bottom: 10px;
 }
 
-/* 제목 스타일 */
 .timetable-title {
-  font:medium;
-  font-size: 30pt;
+  font-size: clamp(22px, 4vw, 36px);
   font-weight: bold;
   color: #333;
   text-align: left;
 }
 
 .timetable-description {
-  font:medium;
-  font-size: 17pt;
+  font-size: clamp(14px, 2vw, 20px);
   color: #666;
   text-align: left;
 }
@@ -25,6 +26,7 @@
   width: 100%;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .uploaded-images {
@@ -38,29 +40,31 @@
 }
 
 .image-row {
-  display: flex; /* 가로 정렬 */
-  gap: 10px; /* 이미지 간격 */
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .uploaded-image,
 .temp-image {
   width: auto;
-  height: 370px;
   max-width: 200px;
   max-height: 370px;
+  height: auto;
   border: 1px solid #ddd;
   border-radius: 5px;
+  object-fit: contain;
 }
 
 .temp-image-container {
-  display: flex; /* 임시 이미지와 버튼을 세로 정렬 */
-  flex-direction: column; /* 세로 방향 배치 */
-  align-items: center; /* 중앙 정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .timetable-button-container {
-  justify-content: flex-end;
   display: flex;
+  justify-content: flex-end;
   width: 100%;
   padding-right: 30px;
   margin-top: 5px;
@@ -68,8 +72,7 @@
 
 .download-button {
   display: flex;
-  align-items: center; 
-  margin-top: 10px;
+  align-items: center;
   gap: 8px;
   background-color: var(--border-color);
   color: black;
@@ -78,11 +81,7 @@
   font-weight: 700;
   padding: 9px 35px;
   margin-top: 15px;
-  margin-left: auto;
-}
-
-.download-button svg {
-  align-items: center;
+  cursor: pointer;
 }
 
 .download-button:hover {

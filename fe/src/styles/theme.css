@@ -10,6 +10,7 @@
   --placeholder-color: #7a7777;
   --primary-font: 'IBM Plex Sans KR', sans-serif;
   --noto-sans-font: "Noto Sans", "Noto Sans KR", sans-serif;
+  --header-height: 70px;
 }
 
 body {

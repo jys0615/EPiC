@@ -2,14 +2,13 @@
 
 @import './theme.css';
 
-.graduation-result-intro{
-  padding-top: 55px;
-  margin-top: 20px;
+.graduation-result-intro {
+  padding-top: calc(var(--header-height) + 20px);
   margin-bottom: 15px;
 }
 
 .graduation-title {
-  font-size: 32px;
+  font-size: clamp(22px, 3vw, 32px);
   font-weight: bold;
   color: #333;
   text-align: left;
@@ -17,148 +16,104 @@
 }
 
 .graduation-description {
-  font-size: 18px;
+  font-size: clamp(14px, 2vw, 18px);
   color: #666;
   text-align: left;
   margin-bottom: 20px;
 }
 
-
 .graduation-container {
   width: 100%;
   max-width: 1020px;
-  min-width: 600px;
-  max-height: 500px;
-  /* margin: 0 auto; */
-  height: 60vh;
-  max-height: 350px;
   background-color: #fff;
   border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  padding-right: -10px;
-  padding-bottom: 0px;
   margin-bottom: 15px;
-  padding-right: 30px;
-  align-items: left;
+  padding: 20px 30px;
+  align-items: flex-start;
   border-radius: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .info-section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-top: 5px;
-  padding-bottom: 5px;
+  width: 100%;
 }
 
-.info-section-title{
-  font-size: 20px;
+.info-section-title {
+  font-size: clamp(16px, 2vw, 20px);
   font-weight: bold;
   text-align: left;
 }
 
 .info-section-title p {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .form-group-horizontal {
   display: flex;
   justify-content: flex-start;
-  width: 90%;
-  padding-right: 20px;
-  max-width: 950px;
-}
-
-.form-group-horizontal .form-group-text {
-  display: flex;
-  font-size: 16px;
-  padding-right: 0px;
-  text-align: center;
-  margin-left: 6px;
-}
-
-.form-group-horizontal{
-  margin-left: 10px;
-  margin-right: 0px;
-  width: 100vw;
-  height: 20px;
-  border-radius: 15px;
-  text-align: left;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
   margin-top: 10px;
-  padding: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.form-group-box {
-  margin-left: 10px;
-  margin-right: 0px;
-  width: 100vw;
-  height: 20px;
+  padding: 10px 15px;
   border-radius: 15px;
-  text-align: left;
-  margin-top: 10px;
-  padding: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.form-group-horizontal .form-group-box p {
-  line-height: 1.5;
-  margin-top: 0px;
-  font-size: 16px;
-}
-
-.form-group-text {
-  max-width: 10%;
-  margin-left: 3px;
+  box-sizing: border-box;
 }
 
 .form-group-box {
   border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 10px 15px;
+  margin-top: 10px;
   max-width: 350px;
-  margin-left: 0px;
-  margin-right: 25px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-#department-title {
-  margin-right: 0px;
+.form-group-box p {
+  line-height: 1.5;
+  margin-top: 0;
+  font-size: 16px;
 }
 
-#studentId-title {
-  margin-left: 5px;
-  margin-right: -10px;
+.form-group-text {
+  font-size: 16px;
+  white-space: nowrap;
+  min-width: 50px;
 }
 
 .result-section {
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 15px;
-  width: 95%;
+  width: 100%;
 }
 
 .result-box {
   border: solid #ddd;
   border-radius: 8px;
-  padding: 0 35px;
+  padding: 16px 24px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 15px;
-  margin-right: 25px;
-  width: calc(100% - 30px);
+  width: 100%;
   min-height: 75px;
-  max-width: 920px;
-
-  max-height: 200px;
+  max-height: 250px;
   overflow-y: auto;
   text-align: left;
+  box-sizing: border-box;
 }
 
 .grad-result-button-container {
   margin-top: 15px;
-  max-width: 1000px;
-  max-height: 300px;
+  width: 100%;
 }
 
 .grad-result-submit-button {
@@ -168,16 +123,13 @@
   color: white;
   border: none;
   border-radius: 6px;
-  font-size: 16px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   font-size: 18px;
   font-weight: 500;
-  height: 42px;
-  margin-left: 50px;
-  margin-bottom: -10px;
-  min-height: 50px;
+  height: 50px;
+  box-sizing: border-box;
 }
 
 .grad-result-submit-button:hover {

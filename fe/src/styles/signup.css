@@ -5,8 +5,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin-top: -110px;
+  min-height: 100vh;
+  padding-top: var(--header-height);
+  box-sizing: border-box;
+  padding-bottom: 2rem;
 }
 
 .epic-logo-text h2 {
@@ -14,7 +16,7 @@
   margin-bottom: 5px;
   color: var(--primary-color);
   font-family: "Baloo 2", sans-serif;
-  font-size: 45px;
+  font-size: clamp(28px, 5vw, 45px);
 }
 
 .signup-header {
@@ -27,10 +29,12 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  width: 380px;
+  width: 90%;
+  max-width: 420px;
   padding: 25px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .input-field,
@@ -39,19 +43,18 @@
   border-radius: 12px;
   font-size: 16px;
   box-sizing: border-box;
-  height: 40px;
+  height: 44px;
   text-align: left;
-  padding: 18px;
+  padding: 0 18px;
 }
 
 .input-field {
-  width: 120%;
-  max-width: 400px;
+  width: 100%;
 }
 
 .email-field {
-  width: 70%;
-  max-width: 280px;
+  flex: 1;
+  min-width: 0;
 }
 
 .verification-container {
@@ -59,8 +62,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 400px;
-  gap: 10px;
+  gap: 8px;
 }
 
 .verification-button {
@@ -72,12 +74,21 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 12px;
-  padding: 8px 20px;
-  height: 42px;
+  padding: 8px 14px;
+  height: 44px;
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 .verification-button:hover {
   background-color: var(--primary-hover-color);
+  color: white;
+}
+
+.signup-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .signup-button {
@@ -88,14 +99,23 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   height: 45px;
-  width: 250px;
-  padding-top: 10px;
-}
-
-.verification-button:hover {
-  background-color: var(--secondary-hover-color);
+  width: 100%;
+  border-radius: 12px;
+  font-size: 16px;
 }
 
 .signup-button:hover {
   background-color: var(--primary-hover-color);
+}
+
+.success-message {
+  color: #38a169;
+  font-size: 14px;
+  text-align: center;
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 14px;
+  text-align: center;
 }

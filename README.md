@@ -56,7 +56,7 @@ UI/UX 디자인은 Figma로 작업되었습니다.
 
 ## 🧩 Project Architecture
 
-<img src="https://drive.google.com/uc?id=1rO7R1_JgHFPFDlCw6fBjn5j_gy3hGwIX" width=55%>
+<img src="./docs/architecture.svg" width=100%>
 
 <br>
 
