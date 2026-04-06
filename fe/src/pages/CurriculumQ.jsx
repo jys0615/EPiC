@@ -1,88 +1,80 @@
 // src/pages/CurriculumQ.jsx
 
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import { addQuestionWithAI } from '../api';
 import '../styles/curriculum-q.css';
 
+const renderMessage = (text) => {
+  return text.split('\n').map((line, i, arr) => {
+    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+    return (
+      <span key={i}>
+        {parts.map((part, j) =>
+          part.startsWith('**') && part.endsWith('**')
+            ? <strong key={j}>{part.slice(2, -2)}</strong>
+            : part
+        )}
+        {i < arr.length - 1 && <br />}
+      </span>
+    );
+  });
+};
+
 const CurriculumQ = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-
   const { keyword, addInfo, aiResponse } = location.state || {};
 
-  const [keyword_1, setKeyword] = useState('');
-  const [addInfo_1, setAddInfo] = useState('');
-  const [aiResponse_1, setAiResponse] = useState(aiResponse || '');
+  const [messages, setMessages] = useState([]);
   const [question, setQuestion] = useState('');
+  const [loading, setLoading] = useState(false);
+  const bottomRef = useRef(null);
+  const textareaRef = useRef(null);
 
   useEffect(() => {
-
-    if (keyword) {
-      console.log("키워드:",keyword);
-      setKeyword(keyword);
-    }
-    if (addInfo) {
-      console.log("에드 인포:",addInfo);
-      setAddInfo(addInfo);
-    }
-    else{
-      console.log("에드 인포 없음음")
-    }
     if (aiResponse) {
-      console.log("ai reponse:",aiResponse);
-      setAiResponse(aiResponse);
+      setMessages([{ role: 'epic', content: aiResponse }]);
     }
-    else{
-      console.log("ai response 없어어")
-    }
-  }, [keyword, addInfo, aiResponse]);
+  }, []);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, loading]);
 
   const handleSubmit = async () => {
+    if (!question.trim() || loading) return;
 
-    console.log('keyword:', keyword_1);
-    console.log('additional info:', addInfo_1);
-    console.log('question:', question);
-    console.log('AI response:', aiResponse_1);
+    const userMessage = question.trim();
+    setQuestion('');
+    if (textareaRef.current) textareaRef.current.style.height = 'auto';
+
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    setLoading(true);
 
     try {
-      console.log("일단 요청 보냄");
-      const response = await addQuestionWithAI(question);
-      console.log("요청 잘 받음");
-      console.log("q->result response : ",response)
-      navigate('/curriculum-result', {
-        state: {
-          keyword: keyword_1,
-          aiAddResponse: response.ai_add_response
-        },
-      });
-    } catch (error) {
-      console.error(error);
-      alert('질문 전송 중 오류가 발생했습니다.');
-      navigate('/curriculum-result', {
-        state: {
-          keyword: keyword_1,
-          aiAddResponse: ''
-        },
-      });
+      const response = await addQuestionWithAI(userMessage);
+      setMessages(prev => [...prev, { role: 'epic', content: response.ai_add_response }]);
+    } catch {
+      setMessages(prev => [...prev, { role: 'epic', content: '오류가 발생했습니다. 다시 시도해 주세요.' }]);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const formatText = (text) => {
-    // 숫자(1., 2., ...) 기준으로 섹션 분리
-    const sections = text.split(/\d\.\s/);
-  
-    return sections.map((section, index) => (
-      <div key={index} style={{ marginBottom: "20px" }}>
-        {section.split("-").map((line, idx) => (
-          <p key={idx} style={{ margin: "5px 0" }}>
-            {line.trim()}
-          </p>
-        ))}
-      </div>
-    ));
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
   };
+
+  const handleTextareaChange = (e) => {
+    setQuestion(e.target.value);
+    e.target.style.height = 'auto';
+    e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
+  };
+
   return (
     <div>
       <Header />
@@ -94,68 +86,50 @@ const CurriculumQ = () => {
       </div>
 
       <div className="curriculum-container">
-        <div className="prev-info-section">
-          <h2 className="section-title">나의 정보</h2>
-          <div className="prev-info-group">
-            <div className="form-group-horizontal">
-              <div className="form-group-text" id="interest-text">
-                <h4>선택 관심사</h4>
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-input"
-                  placeholder="관심사"
-                  id="interest-field"
-                  value={keyword_1}
-                  readOnly
-                />
-              </div>
+        <div className="chat-meta">
+          <span className="chat-keyword-badge">{keyword}</span>
+          {addInfo && <span className="chat-addinfo">{addInfo}</span>}
+        </div>
 
-              <div
-                className="form-group-text"
-                id="q-info-text"
-                style={{ marginLeft: '30px' }}
-              >
-                <h4>추가 정보</h4>
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-input"
-                  placeholder="추가 정보"
-                  id="q-info-field"
-                  value={addInfo_1}
-                  readOnly
-                />
+        <div className="chat-window">
+          {messages.map((msg, i) => (
+            <div key={i} className={`chat-row ${msg.role}`}>
+              {msg.role === 'epic' && (
+                <div className="chat-avatar">E</div>
+              )}
+              <div className={`chat-bubble ${msg.role}`}>
+                {renderMessage(msg.content)}
               </div>
             </div>
-          </div>
+          ))}
+
+          {loading && (
+            <div className="chat-row epic">
+              <div className="chat-avatar">E</div>
+              <div className="chat-bubble epic loading">
+                <span className="dot" />
+                <span className="dot" />
+                <span className="dot" />
+              </div>
+            </div>
+          )}
+
+          <div ref={bottomRef} />
         </div>
 
-        <div className="ai-response-group">
-          <div className="ai-response-box" id="ai-response" style={{ whiteSpace: 'pre-wrap' }}>
-            {formatText(aiResponse_1)}
-          </div>
-        </div>
-
-        <div className="question-input-group">
+        <div className="chat-input-area">
           <textarea
-            className="question-input"
-            placeholder="질문을 입력하세요"
+            ref={textareaRef}
+            className="chat-input"
+            placeholder="추가로 궁금한 점을 입력하세요  (Enter 전송 / Shift+Enter 줄바꿈)"
             value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-          ></textarea>
-          <button className="search-button" onClick={handleSubmit}>
-            검색 &nbsp;
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#FFFFFF"
-            >
-              <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+            onChange={handleTextareaChange}
+            onKeyDown={handleKeyDown}
+            rows={1}
+          />
+          <button className="send-button" onClick={handleSubmit} disabled={loading}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#FFFFFF">
+              <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
             </svg>
           </button>
         </div>
