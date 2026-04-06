@@ -1,17 +1,22 @@
-from fastapi import FastAPI, UploadFile, File, Query, Form
+from fastapi import FastAPI, UploadFile, File, Query, Form, Header
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 from typing import List, Optional, Union
 from openai import OpenAI
 from dotenv import load_dotenv
 import json
+import hashlib
+import redis
 from grad.analyzer import analyze_graduation_pdf
 import numpy as np
 from typing import Dict, Any
+
 # 환경 변수 로딩
 load_dotenv()
 client = OpenAI()
-user_interest_memory = []
+
+# Redis 연결
+r = redis.Redis(host="redis", port=6379, decode_responses=True)
 
 curriculum = []
 
@@ -64,8 +69,21 @@ class TimetableResponseDto(BaseModel):
     imageUrl: str
 ##### 과목 추천 #####
 @app.post("/recommend", response_model=Union[RecommendResponse, ErrorResponse])
-async def recommend(request: RecommendRequest):
+async def recommend(request: RecommendRequest, session_id: Optional[str] = Header(None)):
     keyword = request.keyword.lower()
+
+    # 캐시 키 생성
+    add_info_hash = hashlib.md5(request.add_info.encode()).hexdigest()[:8]
+    cache_key = f"recommend:{keyword}:{add_info_hash}"
+
+    # Cache Hit 확인
+    cached = r.get(cache_key)
+    if cached:
+        cached_data = json.loads(cached)
+        # 세션에 관심사 기록 (캐시 히트여도 저장)
+        if session_id:
+            _save_interest(session_id, request.keyword, cached_data["recommendations"])
+        return RecommendResponse(**cached_data)
 
     # 관련 키워드 과목 필터링
     related = [c for c in curriculum if keyword in [k.lower() for k in c.get("keywords", [])]]
@@ -112,15 +130,23 @@ async def recommend(request: RecommendRequest):
         result_json = json.loads(result_raw)
         recommendations = result_json.get("recommendations", [])
 
-        # 📌 관심사 저장
-        user_interest_memory.append({
-            "keyword": request.keyword,
-            "recommendations": recommendations
-        })
-
         formatted_response = "\n".join([
-            f"{i+1}. {r['title']} - {r['description']}" for i, r in enumerate(recommendations)
+            f"{i+1}. {rec['title']} - {rec['description']}" for i, rec in enumerate(recommendations)
         ])
+
+        response_data = {
+            "keyword": request.keyword,
+            "add_info": request.add_info,
+            "ai_response": formatted_response,
+            "recommendations": recommendations
+        }
+
+        # 캐시 저장 (6시간 TTL)
+        r.setex(cache_key, 21600, json.dumps(response_data, ensure_ascii=False))
+
+        # 세션에 관심사 기록
+        if session_id:
+            _save_interest(session_id, request.keyword, recommendations)
 
         return RecommendResponse(
             keyword=request.keyword,
@@ -139,12 +165,38 @@ async def recommend(request: RecommendRequest):
 
 
 
+##### 세션 헬퍼 함수 #####
+
+def _get_conversation(session_id: str) -> list:
+    """Redis에서 대화 기록 조회"""
+    data = r.get(f"session:conv:{session_id}")
+    return json.loads(data) if data else []
+
+def _save_conversation(session_id: str, history: list):
+    """Redis에 대화 기록 저장 (TTL 30분)"""
+    r.setex(f"session:conv:{session_id}", 1800, json.dumps(history, ensure_ascii=False))
+
+def _get_interest(session_id: str) -> list:
+    """Redis에서 관심사 기록 조회"""
+    data = r.get(f"session:interest:{session_id}")
+    return json.loads(data) if data else []
+
+def _save_interest(session_id: str, keyword: str, recommendations: list):
+    """Redis에 관심사 기록 저장 (TTL 30분)"""
+    interests = _get_interest(session_id)
+    interests.append({"keyword": keyword, "recommendations": recommendations})
+    r.setex(f"session:interest:{session_id}", 1800, json.dumps(interests, ensure_ascii=False))
+
+
 ##### 질의응답 #####
-conversation_history = []
 
 @app.post("/chat", response_model=ChatResponse)
-async def chat(req: ChatRequest):
+async def chat(req: ChatRequest, session_id: Optional[str] = Header(None)):
     question = req.question.strip()
+
+    # 세션별 대화 기록 / 관심사 조회
+    conversation_history = _get_conversation(session_id) if session_id else []
+    user_interest_memory = _get_interest(session_id) if session_id else []
 
     # 과목 요약
     summarized = "\n".join([
@@ -152,9 +204,9 @@ async def chat(req: ChatRequest):
         for c in curriculum[:100]
     ])
 
-    # 📌 이전 추천 이력 요약
+    # 이전 추천 이력 요약
     interest_summary = "\n".join([
-        f"- 관심 키워드: {m['keyword']} → 추천 과목: {', '.join([r['title'] for r in m['recommendations']])}"
+        f"- 관심 키워드: {m['keyword']} → 추천 과목: {', '.join([rec['title'] for rec in m['recommendations']])}"
         for m in user_interest_memory
     ]) or "없음"
 
@@ -185,6 +237,10 @@ async def chat(req: ChatRequest):
 
         reply = response.choices[0].message.content.strip()
         conversation_history.append({"role": "assistant", "content": reply})
+
+        # 세션에 대화 기록 저장
+        if session_id:
+            _save_conversation(session_id, conversation_history)
 
         return ChatResponse(
             question=question,

@@ -14,9 +14,10 @@ public class CurriculumService {
         this.webClient = webClient;
     }
 
-    public CurriculumResponseDto getCurriculumRecommendation(CurriculumRequestDto requestDto) {
+    public CurriculumResponseDto getCurriculumRecommendation(CurriculumRequestDto requestDto, String sessionId) {
         return webClient.post()
                 .uri("/recommend")
+                .header("session-id", sessionId != null ? sessionId : "")
                 .bodyValue(requestDto)
                 .retrieve()
                 .bodyToMono(CurriculumResponseDto.class)

@@ -17,9 +17,11 @@ public class QuestionController {
     }
 
     @PostMapping("/add-ques")
-    public ResponseEntity<QuestionResponseDto> askAdditionalQuestion(@RequestBody QuestionRequestDto requestDto) {
-        
-        QuestionResponseDto response = questionService.askAdditionalQuestion(requestDto);
+    public ResponseEntity<QuestionResponseDto> askAdditionalQuestion(
+            @RequestBody QuestionRequestDto requestDto,
+            @RequestHeader(value = "session-id", required = false) String sessionId) {
+
+        QuestionResponseDto response = questionService.askAdditionalQuestion(requestDto, sessionId);
         return ResponseEntity.ok(response);
     }
 }

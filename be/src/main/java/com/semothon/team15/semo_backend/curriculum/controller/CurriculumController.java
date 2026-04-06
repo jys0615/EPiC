@@ -19,13 +19,15 @@ public class CurriculumController {
     }
 
     @PostMapping("/recommend")
-    public ResponseEntity<CurriculumResponseDto> getCurriculumRecommendation(@RequestBody CurriculumRequestDto requestDto) {
+    public ResponseEntity<CurriculumResponseDto> getCurriculumRecommendation(
+            @RequestBody CurriculumRequestDto requestDto,
+            @RequestHeader(value = "session-id", required = false) String sessionId) {
 
         if (requestDto.getAdd_info() == null) {
             requestDto.setAdd_info("");
         }
 
-        CurriculumResponseDto response = curriculumService.getCurriculumRecommendation(requestDto);
+        CurriculumResponseDto response = curriculumService.getCurriculumRecommendation(requestDto, sessionId);
         return ResponseEntity.ok(response);
     }
 }

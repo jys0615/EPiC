@@ -14,15 +14,16 @@ public class QuestionService {
         this.webClient = webClient;
     }
 
-    public QuestionResponseDto askAdditionalQuestion(QuestionRequestDto requestDto) {
-        System.out.println("🔵ㄹㄹㄹㄹ [Spring Controller] Received DTO: {}"+ requestDto.getQuestion());
-        try{return webClient.post()
-                .uri("/chat")
-                .bodyValue(requestDto)
-                .retrieve()
-                .bodyToMono(QuestionResponseDto.class)
-                .block();
-    }catch (Exception ex) {
+    public QuestionResponseDto askAdditionalQuestion(QuestionRequestDto requestDto, String sessionId) {
+        try {
+            return webClient.post()
+                    .uri("/chat")
+                    .header("session-id", sessionId != null ? sessionId : "")
+                    .bodyValue(requestDto)
+                    .retrieve()
+                    .bodyToMono(QuestionResponseDto.class)
+                    .block();
+        } catch (Exception ex) {
             throw new RuntimeException("Failed to call external API", ex);
         }
     }
