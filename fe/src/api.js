@@ -4,10 +4,16 @@ import axios from 'axios';
 import CONFIG from './config';
 
 // 세션 ID: 브라우저 탭 단위로 유지 (새로고침해도 유지, 탭 닫으면 초기화)
+const generateUUID = () =>
+  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+
 const getSessionId = () => {
   let sessionId = sessionStorage.getItem('epic_session_id');
   if (!sessionId) {
-    sessionId = crypto.randomUUID();
+    sessionId = generateUUID();
     sessionStorage.setItem('epic_session_id', sessionId);
   }
   return sessionId;
