@@ -100,7 +100,7 @@ async def recommend(request: RecommendRequest):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "너는 AI 조교야. 반드시 JSON만으로 답변해."},
                 {"role": "user", "content": prompt}
@@ -175,7 +175,7 @@ async def chat(req: ChatRequest):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": summarized}
