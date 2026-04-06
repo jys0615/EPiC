@@ -215,6 +215,14 @@ uvicorn main:app --reload
 
 <br>
 
+## 📊 Performance Baseline
+
+리팩토링 전 실배포 환경(Azure)에서 측정한 API 응답 시간 및 네트워크 현황입니다.
+
+<a href="./docs/PERFORMANCE_BASELINE.md" target="_blank">👉 베이스라인 측정 결과 보기</a>
+
+<br>
+
 ## 🔨 Refactoring Plan
 
 성능·보안·품질 향상을 위한 리팩토링 계획을 정리하였습니다.
