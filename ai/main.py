@@ -267,33 +267,31 @@ async def analyze_pdf(
     studentId: str = Form(..., description="학번")
 ):
     try:
-        # # 1. 파일 형식 확인
-        # if file.content_type != "application/pdf":
-        #     return AnalyzePdfResponse(responseData={
-        #         "error": "PDF 파일만 업로드 가능합니다.",
-        #         "fileName": file.filename
-        #     })
-
-        # 2. 파일 내용 읽기
         content = await file.read()
 
-        # 3. 졸업 진단 실행
+        # 캐시 키 생성 (PDF 내용 해시 + 학과 + 학번)
+        pdf_hash = hashlib.md5(content).hexdigest()[:12]
+        cache_key = f"grad:{department}:{studentId}:{pdf_hash}"
+
+        # Cache Hit 확인
+        cached = r.get(cache_key)
+        if cached:
+            return AnalyzePdfResponse(responseData=json.loads(cached))
+
+        # Cache Miss → GPT 분석
         result = await analyze_graduation_pdf(content, department, studentId)
 
-        # 4. 분석 결과 감싸기
         if isinstance(result, dict):
             analysis_result = result
         else:
             analysis_result = {"result": result}
 
-        # 5. 공통 메타 정보 + 분석 결과 포함
-        return AnalyzePdfResponse(responseData={
-            # "studentId": studentId,
-            # "department": department,
-            # "fileName": file.filename,
-            # "message": "FastAPI 업로드 및 졸업 진단 성공 ✅",
-            "analysis": analysis_result
-        })
+        response_data = {"analysis": analysis_result}
+
+        # 캐시 저장 (24시간 TTL)
+        r.setex(cache_key, 86400, json.dumps(response_data, ensure_ascii=False))
+
+        return AnalyzePdfResponse(responseData=response_data)
 
     except Exception as e:
         return AnalyzePdfResponse(responseData={
