@@ -8,7 +8,7 @@
 
 <br>
 
-🥈 **경희대학교 제1회 세모톤 최우수상 수상**
+🥈 **OOO학교 제1회 세모톤 최우수상 수상**
 
 <br>
 
@@ -249,7 +249,7 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 <br>
 
-*경희대학교 제1회 세모톤 최우수상 🥈*
+*OOO학교 제1회 세모톤 최우수상 🥈*
 
 <img src="./docs/victory_shot.png" width="60%">
 
