@@ -2,7 +2,7 @@
 
 # 🎓 EPiC: Edu Path in CS
 
-**경희대학교 소프트웨어융합대학 학생들의 효율적인 학업 계획을 지원하는 AI 기반 서비스**
+**소프트웨어융합대학 학생들의 효율적인 학업 계획을 지원하는 AI 기반 서비스**
 
 <img src="https://drive.google.com/uc?id=1-NXfFN6PX0KT_qrLwCdQTcU-c1SZ9qzn" width="65%">
 
